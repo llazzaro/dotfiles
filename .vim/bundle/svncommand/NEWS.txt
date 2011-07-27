@@ -1,0 +1,13 @@
+2005.04.18  1.67.3
+    - fix svn info
+    - add quick hack svk support via SVNCommandAutoSVK variable
+
+2005.04.17  1.67.2
+    - re-added SVNInfo which got reverted in previous version
+    - pass -v to "svn status" for SVNStatus()
+    - add SVNCommitDiff for grabbing a diff from the files listed in
+      svn-commit.tmp
+
+2005.04.17  1.67.1
+    - updated to be based on version 1.67 of cvscommand.vim
+    - included svn commit and svn log syntax highlighting

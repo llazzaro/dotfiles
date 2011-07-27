@@ -1,0 +1,8 @@
+To install this plugin copy plugins/svncommand.vim to your ~/.svn/plugins dir.
+
+You will probably also want to pick up syntax/svn.vim and syntax/svnlog.vim in
+a similar fashion.
+
+Read the comment header of svncommand.vim for commands, keybindings, and other
+user-configurable things.
+
