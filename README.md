@@ -1,4 +1,4 @@
-![Alt text](http://1.bp.blogspot.com/-fskvnqzDiYo/TjBEBr2l0ZI/AAAAAAAAAiY/KbUQz8wNkRw/s1600/vim-editor_logo.png)<br/>a
+![Vim logo](http://1.bp.blogspot.com/-fskvnqzDiYo/TjBEBr2l0ZI/AAAAAAAAAiY/KbUQz8wNkRw/s1600/vim-editor_logo.png)<br/>
 
 ## What is this?
 
