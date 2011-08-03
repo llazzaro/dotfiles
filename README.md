@@ -10,6 +10,11 @@ Backup your vim settings (.vim directory and .vimrc).
 Now clone my settings and move them to your home (is recommended to delete your
 settings)
 
+git clone git@github.com:llazzaro/.vim.git
+cd .vim
+git submodule update --init
+
+
 ## Plugins
 
 ack  

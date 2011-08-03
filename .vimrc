@@ -8,7 +8,8 @@ set completeopt=menuone,longest,preview
 
 let g:pyflakes_use_quickfix = 0
 
-let g:pep8_map='<leader>8'
+let g:pep8_map= '<F5>'
+
 
 set expandtab
 set textwidth=79
@@ -18,7 +19,11 @@ set shiftwidth=4
 set autoindent
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+"map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen()<CR>
+map <F6> :call MakeGreen()<CR>
+map <leader>a <Esc>:Ack!
+map <F2> :NERDTreeToggle<CR>
+map <F3> :Ack!
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
