@@ -25,6 +25,8 @@ map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
 
+autocmd FileType python compiler pylint
+
 " Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path
