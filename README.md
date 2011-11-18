@@ -11,6 +11,8 @@ Now clone my settings and move them to your home (is recommended to delete your
 settings)
 
 * git clone git@github.com:llazzaro/.vim.git
+* cd
+* ln -s .vim/.vimrc .vimrc
 * cd .vim
 * git submodule update --init
 
