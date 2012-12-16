@@ -60,4 +60,10 @@
 	url = https://github.com/wincent/Command-T.git
 [submodule "bundle/pytest"]
 	path = bundle/pytest
-	url = https://github.com/alfredodeza/pytest.vim.git
+        url = https://github.com/alfredodeza/pytest.vim.git
+[submodule "bundle/syntastic"]
+        path = bundle/syntastic
+        url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/vim-ruby-debugger"]
+        path = bundle/vim-ruby-debugger
+        url = https://github.com/astashov/vim-ruby-debugger.git

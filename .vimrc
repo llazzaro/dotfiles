@@ -1,6 +1,6 @@
 call pathogen#infect()
 syntax on
-filetype plugin indent on
+filetype plugin indent off
 
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
@@ -12,11 +12,10 @@ let g:pep8_map= '<F5>'
 
 
 set expandtab
-set textwidth=79
 set tabstop=8
 set softtabstop=4
 set shiftwidth=4
-set autoindent
+"set autoindent
 colorscheme desert
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
@@ -26,7 +25,7 @@ map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
 
-autocmd FileType python compiler pylint
+" autocmd FileType python compiler pylint
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
@@ -39,3 +38,5 @@ if 'VIRTUAL_ENV' in os.environ:
      activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
      execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+set backspace=indent,eol,start 
