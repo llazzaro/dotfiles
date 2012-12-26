@@ -26,7 +26,7 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
 
 " autocmd FileType python compiler pylint
-
+let g:user_zen_expandabbr_key = '<c-e>'
 " Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path
