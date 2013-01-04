@@ -64,9 +64,6 @@
 [submodule "bundle/syntastic"]
         path = bundle/syntastic
         url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/vim-ruby-debugger"]
-        path = bundle/vim-ruby-debugger
-        url = https://github.com/astashov/vim-ruby-debugger.git
 [submodule "bundle/zencoding"]
         path = bundle/zencoding
         url = https://github.com/mattn/zencoding-vim.git
