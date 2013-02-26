@@ -3,10 +3,25 @@
 ## What is this?
 
 This is my vim configuration for use with python and php.
+## How to install vim_
+# Prerequisites:
+# (Ubuntu) sudo apt-get build-dep vim
+# (OSX) Command Line Tools for Xcode
+* hg clone https://vim.googlecode.com/hg/ vim
+* cd vim/src
+* ./configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
+* make && make install
+* mkdir -p $HOME/bin
+* cd $HOME/bin
+* ln -s $HOME/opt/vim/bin/vim
+check if everything was OK
 
-## How to install?
+* which vim
+* vim --version
 
-Backup your vim settings (.vim directory and .vimrc). 
+## How to install configuration?
+
+Backup your vim settings (.vim directory and .vimrc).
 Now clone my settings and move them to your home (is recommended to delete your
 settings)
 
@@ -19,25 +34,25 @@ settings)
 
 ## Plugins
 
-ack  
-command-t  
-fugitive  
-git  
-gundo  
-makegreen  
-minibufexpl  
-nerdtree  
-pep8  
-pydoc  
-pyflakes  
-pysmell  
-py.test  
-ropevim  
-snipmate  
-sparkup  
-supertab  
-surround  
-svncommand 
+ack
+command-t
+fugitive
+git
+gundo
+makegreen
+minibufexpl
+nerdtree
+pep8
+pydoc
+pyflakes
+pysmell
+py.test
+ropevim
+snipmate
+sparkup
+supertab
+surround
+svncommand
 
 
 ## How to add more plugins
