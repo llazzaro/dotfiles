@@ -5,13 +5,20 @@
 " the ":filetype on" command.
 
 " Invoke ":helptags" on all "doc" subdirectories in the "runtimepath" variable.
+"
+
+" Setup Pathogen to manage your plugins
+" " mkdir -p ~/.vim/autoload ~/.vim/bundle
+" " curl -so ~/.vim/autoload/pathogen.vim
+" https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
+" " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
 call pathogen#infect()
 
 " automatically reload vimrc when it's saved
  au BufWritePost .vimrc so ~/.vimrc
 
 syntax on
-filetype plugin off
+filetype plugin on
 filetype indent off
 
 " tab spaces
