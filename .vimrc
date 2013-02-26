@@ -15,7 +15,7 @@
 call pathogen#infect()
 
 " automatically reload vimrc when it's saved
- au BufWritePost .vimrc so ~/.vimrc
+au BufWritePost .vimrc so ~/.vimrc
 
 syntax on
 filetype plugin on
@@ -121,7 +121,13 @@ set directory=~/.swap//
 " -----------------------------------------------------------------------------
 " Syntax Highlighting / Color Scheme
 " -----------------------------------------------------------------------------
-colorscheme desert
+" colorscheme desert
+"
+" mkdir -p ~/.vim/colors && cd ~/.vim/colors
+" wget -O wombat256mod.vim
+" http://www.vim.org/scripts/download_script.php?src_id=13400
+set t_Co=256
+color wombat256mod
 
 " -----------------------------------------------------------------------------
 " Hooks
