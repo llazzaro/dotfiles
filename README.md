@@ -19,6 +19,9 @@ check if everything was OK
 * which vim
 * vim --version
 
+# Python Prerequisites:
+* nose-machineout (easy_install nose-machineout)
+
 ## How to install configuration?
 
 Backup your vim settings (.vim directory and .vimrc).

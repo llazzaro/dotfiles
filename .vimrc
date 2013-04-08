@@ -19,7 +19,7 @@ au BufWritePost .vimrc so ~/.vimrc
 
 syntax on
 filetype plugin on
-filetype indent off
+filetype indent on
 
 " tab spaces
 autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
@@ -31,6 +31,17 @@ set completeopt=menuone,longest,preview
 "hide buffers instead of closing them this means that the current buffer can be put to background without being written; and that marks and undo history are preserved
 set hidden
 set undolevels=1000
+" ------------------
+" Python mode configuration
+"  -----------------
+" Set key 'R' for run python code
+let g:pymode_run_key = 'R'
+" Key for show python documentation
+let g:pymode_doc_key = 'K'
+" Enable python folding
+let g:pymode_folding = 0
+
+
 " -----------------------------------------------------------------------------
 " GUI / Look & Feel
 " -----------------------------------------------------------------------------
@@ -75,12 +86,10 @@ set showmatch
 " -----------------------------------------------------------------------------
 set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
 
-
 let g:pyflakes_use_quickfix = 0
 
 " Python PEP8 checker F5
-let g:pep8_map= '<F5>'
-
+" let g:pep8_map= '<F5>'
 " -----------------------------------------------------------------------------
 " Indentation
 " -----------------------------------------------------------------------------
@@ -134,6 +143,7 @@ color wombat256mod
 " -----------------------------------------------------------------------------
 
 autocmd BufWritePre * :call Trim()
+autocmd BufNewFile,BufRead *.py compiler nose
 " autocmd FileType python autocmd BufWritePre <buffer> :call Indent()
 
 " -----------------------------------------------------------------------------
@@ -141,7 +151,10 @@ autocmd BufWritePre * :call Trim()
 " -----------------------------------------------------------------------------
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
-"map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen()<CR>
+" map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen()<CR>
+nmap <C-e> :e#<CR>
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
 map <F6> :call MakeGreen()<CR>
 map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
@@ -212,4 +225,6 @@ if 'VIRTUAL_ENV' in os.environ:
      activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
      execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+
 

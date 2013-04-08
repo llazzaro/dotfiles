@@ -67,3 +67,9 @@
 [submodule "bundle/zencoding"]
         path = bundle/zencoding
         url = https://github.com/mattn/zencoding-vim.git
+[submodule "bundle/pylint"]
+        path = bundle/pylint
+        url = https://github.com/orenhe/pylint.vim.git
+[submodule "bundle/python-mode"]
+        path = bundle/python-mode
+        url = http://github.com/klen/python-mode.git
