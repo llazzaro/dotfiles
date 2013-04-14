@@ -54,7 +54,7 @@ let &titlestring = expand('$USERNAME') . '@' . hostname()
     \ . ' > ' . '%{expand("%:p:~")}'
 
 " Show status line, even if there is only one window.
-" set laststatus=2
+set laststatus=2
 
 " Customize status line.
 "set statusline+=%t
