@@ -54,26 +54,26 @@ let &titlestring = expand('$USERNAME') . '@' . hostname()
     \ . ' > ' . '%{expand("%:p:~")}'
 
 " Show status line, even if there is only one window.
-set laststatus=2
+" set laststatus=2
 
 " Customize status line.
-set statusline+=%t
-set statusline+=\ \|
-set statusline+=\ %y
-set statusline+=[%{&fileencoding}]
-set statusline+=%{&bomb?'[BOM]':''}
-set statusline+=[%{&fileformat}]
-set statusline+=%r
-set statusline+=%m
-set statusline+=\ \|
-set statusline+=\ #%n
-set statusline+=\ \|
-set statusline+=\ [%c/%{&textwidth}]:[%l/%L][%p%%]
-set statusline+=\ \|
-set statusline+=\ [%b][0x%B]
-set statusline+=\ \|
-set statusline+=\ [%{mode(1)}]
-set statusline+=%{&paste?'[paste]':''}
+"set statusline+=%t
+"set statusline+=\ \|
+"set statusline+=\ %y
+"set statusline+=[%{&fileencoding}]
+"set statusline+=%{&bomb?'[BOM]':''}
+"set statusline+=[%{&fileformat}]
+"set statusline+=%r
+"set statusline+=%m
+"set statusline+=\ \|
+"set statusline+=\ #%n
+"set statusline+=\ \|
+"set statusline+=\ [%c/%{&textwidth}]:[%l/%L][%p%%]
+"set statusline+=\ \|
+"set statusline+=\ [%b][0x%B]
+"set statusline+=\ \|
+"set statusline+=\ [%{mode(1)}]
+"set statusline+=%{&paste?'[paste]':''}
 
 " Ignore non-text or back-up files.
 set wildignore=*.o,*.obj,*.a,*.lib,*.so,*.dll,*.exe,*.pyc,*.class,*.swp,*~
