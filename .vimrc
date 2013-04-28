@@ -88,16 +88,18 @@ set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising
 
 let g:pyflakes_use_quickfix = 0
 
+set pastetoggle=<F1>
 " Python PEP8 checker F5
 " let g:pep8_map= '<F5>'
 " -----------------------------------------------------------------------------
 " Indentation
 " -----------------------------------------------------------------------------
 set expandtab " insert space chars whenever a tab key is pressed
-set tabstop=8 " how many columns a tab counts for
+set tabstop=4 " how many columns a tab counts for
 set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab is enabled)
 set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
-"set autoindent
+set autoindent
+set smartindent
 
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
