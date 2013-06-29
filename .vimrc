@@ -6,31 +6,58 @@
 
 " Invoke ":helptags" on all "doc" subdirectories in the "runtimepath" variable.
 "
+set nocompatible
+" Vundle
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/Vundle
+    let iCanHazVundle=0
+endif
 
-" Setup Pathogen to manage your plugins
-" " mkdir -p ~/.vim/autoload ~/.vim/bundle
-" " curl -so ~/.vim/autoload/pathogen.vim
-" https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
-" " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
-call pathogen#infect()
+" required for Vundle
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'klen/python-mode'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'majutsushi/tagbar'
+Bundle 'kien/ctrlp.vim'
+
+" Installing plugins the first time
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
 
 " automatically reload vimrc when it's saved
 au BufWritePost .vimrc so ~/.vimrc
 
-syntax on
+" syntax on
 filetype plugin on
 filetype indent on
 
-" tab spaces
-autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
-autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
-
 set completeopt=menuone,longest,preview
+
+" always show status bar
+set ls=2
 
 "hide buffers instead of closing them this means that the current buffer can be put to background without being written; and that marks and undo history are preserved
 set hidden
 set undolevels=1000
+
 " ------------------
 " Python mode configuration
 "  -----------------
@@ -55,25 +82,6 @@ let &titlestring = expand('$USERNAME') . '@' . hostname()
 
 " Show status line, even if there is only one window.
 set laststatus=2
-
-" Customize status line.
-"set statusline+=%t
-"set statusline+=\ \|
-"set statusline+=\ %y
-"set statusline+=[%{&fileencoding}]
-"set statusline+=%{&bomb?'[BOM]':''}
-"set statusline+=[%{&fileformat}]
-"set statusline+=%r
-"set statusline+=%m
-"set statusline+=\ \|
-"set statusline+=\ #%n
-"set statusline+=\ \|
-"set statusline+=\ [%c/%{&textwidth}]:[%l/%L][%p%%]
-"set statusline+=\ \|
-"set statusline+=\ [%b][0x%B]
-"set statusline+=\ \|
-"set statusline+=\ [%{mode(1)}]
-"set statusline+=%{&paste?'[paste]':''}
 
 " Ignore non-text or back-up files.
 set wildignore=*.o,*.obj,*.a,*.lib,*.so,*.dll,*.exe,*.pyc,*.class,*.swp,*~
@@ -100,6 +108,12 @@ set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab 
 set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
 set autoindent
 set smartindent
+
+" tab spaces
+autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
+autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
+
 
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
@@ -138,7 +152,8 @@ set directory=~/.swap//
 " wget -O wombat256mod.vim
 " http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-color wombat256mod
+" color wombat256mod
+color  distinguished
 
 " -----------------------------------------------------------------------------
 " Hooks
