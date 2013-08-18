@@ -30,10 +30,11 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
+Bundle 'reinh/vim-makegreen'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -168,7 +169,7 @@ autocmd BufNewFile,BufRead *.py compiler nose
 " -----------------------------------------------------------------------------
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
-" map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen()<CR>
+" map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen<CR>
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
