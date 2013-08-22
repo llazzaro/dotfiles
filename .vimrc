@@ -30,11 +30,17 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-powerline'
-" Bundle 'klen/python-mode'
 Bundle 'Lokaltog/vim-distinguished'
+Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'reinh/vim-makegreen'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kien/tabman.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'mattn/webapi-vim'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'mileszs/ack.vim'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -182,6 +188,10 @@ nmap ,a <Esc>:Ack!
 
 " autocmd FileType python compiler pylint
 let g:user_zen_expandabbr_key = '<c-e>'
+
+" ctrl-p command
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " Write file with sudo
 cmap w!! %!sudo tee > /dev/null %
