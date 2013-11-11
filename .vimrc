@@ -31,7 +31,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'reinh/vim-makegreen'
@@ -42,6 +41,22 @@ Bundle 'mattn/webapi-vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'bingaman/vim-sparkup.git'
+Bundle 'nvie/vim-flake8'
+" A Vim plugin which shows a git diff in the 'gutter'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'pyflakes.vim'
+
+
+syntax on
+filetype plugin on
+filetype indent on
+
+let g:pyflakes_use_quickfix = 0
+autocmd BufWritePost *.py call Flake8()
+
+let g:flake8_ignore="E501,W293"
+let g:flake8_max_line_length=99
+
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -53,10 +68,6 @@ endif
 " automatically reload vimrc when it's saved
 au BufWritePost .vimrc so ~/.vimrc
 
-" syntax on
-filetype plugin on
-filetype indent on
-
 set completeopt=menuone,longest,preview
 
 " always show status bar
@@ -65,26 +76,6 @@ set ls=2
 "hide buffers instead of closing them this means that the current buffer can be put to background without being written; and that marks and undo history are preserved
 set hidden
 set undolevels=1000
-
-" ------------------
-" Python mode configuration
-"  -----------------
-" Set key 'R' for run python code
-let g:pymode_run_key = 'R'
-" Key for show python documentation
-let g:pymode_doc_key = 'K'
-" Enable python folding
-let g:pymode_folding = 0
-" Enable checking on every save
-let g:pymode_lint_write = 1
-" Ignore lint
-let g:pymode_lint_ignore = "E501"
-let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
-" Show error message if cursor placed at the error line
-let g:pymode_lint_message = 1
-
-
-
 
 " -----------------------------------------------------------------------------
 " GUI / Look & Feel
@@ -111,7 +102,6 @@ set showmatch
 " -----------------------------------------------------------------------------
 set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
 
-let g:pyflakes_use_quickfix = 0
 
 set pastetoggle=<F1>
 " Python PEP8 checker F5
