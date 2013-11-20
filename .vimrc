@@ -45,6 +45,9 @@ Bundle 'nvie/vim-flake8'
 " A Vim plugin which shows a git diff in the 'gutter'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'pyflakes.vim'
+Bundle 'rstacruz/sparkup'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'vim-scripts/mru.vim'
 
 
 syntax on
@@ -103,7 +106,7 @@ set showmatch
 set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
 
 
-set pastetoggle=<F1>
+set pastetoggle=<F3>
 " Python PEP8 checker F5
 " let g:pep8_map= '<F5>'
 " -----------------------------------------------------------------------------
@@ -176,6 +179,7 @@ autocmd BufNewFile,BufRead *.py compiler nose
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
 " map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen<CR>
+let mapleader=","
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
