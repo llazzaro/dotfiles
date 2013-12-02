@@ -190,6 +190,7 @@ map <F3> :Ack!
 nmap ,g :GundoToggle<CR>
 nmap ,a <Esc>:Ack!
 map <leader>jt <Esc>:%!json_xs -f json -t json-pretty<CR>
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " autocmd FileType python compiler pylint
 let g:user_zen_expandabbr_key = '<c-e>'
