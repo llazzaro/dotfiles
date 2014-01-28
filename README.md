@@ -7,10 +7,15 @@ This is my vim configuration for use with python and php.
 # Prerequisites:
 # (Ubuntu) sudo apt-get build-dep vim
 # (OSX) Command Line Tools for Xcode
+* sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial
+* sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common
 * hg clone https://vim.googlecode.com/hg/ vim
-* cd vim/src
-* ./configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
-* make && make install
+* cd vim
+* ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib/python2.7/config --enable-perlinterp --enable-gui=gtk2 --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
+* make VIMRUNTIMEDIR=/usr/share/vim/vim74
+* sudo make install
 * mkdir -p $HOME/bin
 * cd $HOME/bin
 * ln -s $HOME/opt/vim/bin/vim
@@ -31,8 +36,6 @@ settings)
 * git clone git@github.com:llazzaro/.vim.git
 * cd
 * ln -s .vim/.vimrc .vimrc
-* cd .vim
-* git submodule update --init
 
 
 ## Plugins
@@ -60,29 +63,10 @@ svncommand
 
 ## How to add more plugins
 
-To manage plugins easy I use pathogen (check http://www.vim.org/scripts/script.php?script_id=2332)
-
-Example to install PEP8 plugin
-In .vim directory :
-
-git submodule add https://github.com/sontek/rope-vim.git bundle/ropevim
-git submodule init
-git submodule update
-git submodule foreach git submodule init
-git submodule foreach git submodule update
 
 ## How to remove plugin
-Please email me if you find a better way to remove a git submodule
-
-- Delete the relevant line from the .gitmodules file.
-- Delete the relevant section from .git/config.
-- Run git rm --cached path_to_submodule (no trailing slash).
-- Commit and delete the now untracked submodule files.
 
 
-## TODO
-
-- Python django autocomplete
 
 ## Contact
 
