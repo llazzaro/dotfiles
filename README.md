@@ -3,10 +3,8 @@
 ## What is this?
 
 This is my vim configuration for use with python and php.
-## How to install vim_
-# Prerequisites:
-# (Ubuntu) sudo apt-get build-dep vim
-# (OSX) Command Line Tools for Xcode
+# Compile vim from source code:
+
 * sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
 libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
 libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial
