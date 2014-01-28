@@ -43,12 +43,15 @@ Bundle 'mileszs/ack.vim'
 Bundle 'bingaman/vim-sparkup.git'
 Bundle 'nvie/vim-flake8'
 " A Vim plugin which shows a git diff in the 'gutter'
-Bundle 'airblade/vim-gitgutter'
+" Bundle 'airblade/vim-gitgutter'
 Bundle 'pyflakes.vim'
-Bundle 'rstacruz/sparkup'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'vim-scripts/mru.vim'
-
+" Bundle 'jelera/vim-javascript-syntax'
+" Bundle 'pangloss/vim-javascript'
+" Bundle 'nathanaelkane/vim-indent-guides'
+" Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/syntastic'
+" Bundle 'Valloric/YouCompleteMe'
+" Bundle 'marijnh/tern_for_vim'
 
 syntax on
 filetype plugin on
@@ -59,6 +62,26 @@ autocmd BufWritePost *.py call Flake8()
 
 let g:flake8_ignore="E501,W293"
 let g:flake8_max_line_length=99
+
+" This does what it says on the tin. It will check your file on open too, not
+" just on save.
+" You might not want this, so just leave it out if you don't.
+let g:syntastic_javascript_checkers = ['jshint']
+let g:jshint_highlight_color = "Red"
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+" Better :sign interface symbols
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+
+" These are the tweaks I apply to YCM's config, you don't need them but they
+" might help.
+" YCM gives you popups and splits by default that some people might not like,
+" so these should tidy it up a bit for you.
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
 
 
 " Installing plugins the first time
@@ -79,7 +102,7 @@ set ls=2
 "hide buffers instead of closing them this means that the current buffer can be put to background without being written; and that marks and undo history are preserved
 set hidden
 set undolevels=1000
-
+set background=dark
 " -----------------------------------------------------------------------------
 " GUI / Look & Feel
 " -----------------------------------------------------------------------------
@@ -106,7 +129,7 @@ set showmatch
 set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
 
 
-set pastetoggle=<F3>
+set pastetoggle=<F1>
 " Python PEP8 checker F5
 " let g:pep8_map= '<F5>'
 " -----------------------------------------------------------------------------
@@ -121,7 +144,7 @@ set smartindent
 
 " tab spaces
 autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
+" autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
 
 
@@ -179,7 +202,6 @@ autocmd BufNewFile,BufRead *.py compiler nose
 "ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
 " map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen<CR>
-let mapleader=","
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
@@ -190,6 +212,7 @@ map <F3> :Ack!
 nmap ,g :GundoToggle<CR>
 nmap ,a <Esc>:Ack!
 map <leader>jt <Esc>:%!json_xs -f json -t json-pretty<CR>
+imap <C-c> <CR><Esc>O
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " autocmd FileType python compiler pylint
