@@ -37,7 +37,7 @@ ZSH_THEME="robbyrussell"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp 
+# Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
@@ -67,3 +67,6 @@ export PATH="/home/lcubo/opt/vim/bin/:/usr/local/bin:/usr/bin:/bin:/usr/local/sb
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+#virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
