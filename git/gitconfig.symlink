@@ -1,0 +1,10 @@
+[user]
+    name = Leonardo Lazzaro
+    email = lazzaroleonardo@gmail.com
+[alias]
+    st = status -s
+    ci = commit -am
+[color]
+    ui = auto
+[core]
+	editor = vim -f
