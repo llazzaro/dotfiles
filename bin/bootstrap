@@ -33,8 +33,8 @@ case `uname` in
   Linux )
      LINUX=1
      which yum && { package_manager=$(which yum);return; }
-     which zypper && { return; }
-     which apt-get && { return; }
+     which zypper && { package_manager=$(which zypper);return; }
+     which apt-get && { package_manager=$(which apt-get);return; }
      ;;
   Darwin )
      DARWIN=1
@@ -47,14 +47,18 @@ esac
 
 install_deps() {
    detect_package_manager
+   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    if [ "$package_manager" == "/bin/yum" ]
    then
-       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
        sudo yum update
        sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop
        sudo yum install make automake gcc gcc-c++ kernel-devel
        yum install libxslt-devel libxml2-devell
        sudo yum-builddep vim
+   fi
+   if [ "$package_manager" == "/usr/bin/apt-get" ]
+   then
+       echo "not yet"
    fi
 }
 
