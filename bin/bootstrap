@@ -68,13 +68,13 @@ compile_vim() {
       hg clone https://vim.googlecode.com/hg/ $temp_dir
       cd $temp_dir
       ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
-      make VIMRUNTIMEDIR=/usr/share/vim/vim74
-      sudo make install
+      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim74
+      make install
       mkdir -p $HOME/bin
       cd $HOME/bin
       ln -s $HOME/opt/vim/bin/vim
    fi
-   
+
 }
 
 
