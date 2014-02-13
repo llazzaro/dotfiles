@@ -70,3 +70,7 @@ export PATH="/home/lcubo/opt/vim/bin/:/usr/local/bin:/usr/bin:/bin:/usr/local/sb
 #virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/bin/virtualenvwrapper.sh
+
+#fix vim colors
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
