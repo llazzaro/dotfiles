@@ -1,9 +1,13 @@
+# Default termtype. If the rcfile sets $TERM, that overrides this value.
+set -g default-terminal screen-256color
+
 # Set a Ctrl-b shortcut for reloading your tmux config
 bind r source-file ~/.tmux.conf
 
 # Rename your terminals
 set -g set-titles on
 set -g set-titles-string '#(whoami)::#h::#(curl ipecho.net/plain;echo)'
+
 
 # Status bar customization
 set -g status-utf8 on

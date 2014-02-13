@@ -1,10 +1,30 @@
+[color]
+  ui = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
 [user]
     name = Leonardo Lazzaro
     email = lazzaroleonardo@gmail.com
 [alias]
     st = status -s
     ci = commit -am
-[color]
-    ui = auto
+    amend = commit --amend            # ammend your last commit
+    l = log --graph --date=short
+    tags = tag -n                        # show tags with <n> lines of each tag message
+    unstage = reset HEAD # remove files from index (tracking)
+    uncommit = reset --soft HEAD^ # go back before last commit, with files in uncommitted state
+[format]
+  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+[push]
+  # 'git push' will push the current branch to its tracking branch
+  # the usual default is to push all branches
+  default = tracking
 [core]
 	editor = vim -f

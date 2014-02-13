@@ -1,0 +1,15 @@
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# Get week number
+alias week='date +%V'
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+
