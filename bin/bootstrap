@@ -43,14 +43,17 @@ case `uname` in
      # Handle AmigaOS, CPM, and modified cable modems here.
      ;;
 esac
-}  
+}
 
 install_deps() {
    detect_package_manager
    if [ "$package_manager" == "/bin/yum" ]
    then
+       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
        sudo yum update
-       sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch
+       sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop
+       sudo yum install make automake gcc gcc-c++ kernel-devel
+       yum install libxslt-devel libxml2-devell
        sudo yum-builddep vim
    fi
 }
