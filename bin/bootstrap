@@ -63,8 +63,9 @@ install_deps() {
        curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
        sudo yum update
        sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
-       sudo yum install make automake gcc gcc-c++ kernel-devel
-       yum install libxslt-devel libxml2-devell
+       sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers
+       sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel
+       sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber
        sudo yum-builddep vim
        npm install jshint
        wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
