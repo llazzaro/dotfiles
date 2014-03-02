@@ -45,7 +45,7 @@ Bundle 'bingaman/vim-sparkup.git'
 " A Vim plugin which shows a git diff in the 'gutter'
 " Bundle 'airblade/vim-gitgutter'
 " Bundle 'pyflakes.vim'
-" Bundle 'jelera/vim-javascript-syntax'
+Bundle 'jelera/vim-javascript-syntax'
 " Bundle 'pangloss/vim-javascript'
 " Bundle 'nathanaelkane/vim-indent-guides'
 " Bundle 'Raimondi/delimitMate'
@@ -72,6 +72,7 @@ let g:syntastic_auto_loc_list=1
 " Better :sign interface symbols
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
+let g:syntastic_auto_jump=1
 
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
