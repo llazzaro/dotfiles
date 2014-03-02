@@ -74,6 +74,15 @@ install_deps() {
        wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
        sudo easy_install pip
        sudo pip install flake8
+       mkdir -p ~/.powerline
+       mkdir -p ~/.fonts
+       mkdir -p ~/.config/fontconfig
+       mkdir -p ~/.config/fontconfig/conf.d
+       git clone https://github.com/Lokaltog/powerline.git ~/.powerline
+       git clone https://github.com/Lokaltog/powerline-fonts.git ~/.fonts
+       cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
+       fc-cache -vf ~/.fonts
+       sudo cp ~/.powerline/font/10-powerline-symbols.conf /etc/fonts/conf.d
    fi
    if [ "$package_manager" == "/usr/bin/apt-get" ]
    then

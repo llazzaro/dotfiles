@@ -29,7 +29,6 @@ Bundle 'gmarik/vundle'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
@@ -53,6 +52,7 @@ Bundle 'scrooloose/syntastic'
 " Bundle 'Valloric/YouCompleteMe'
 " Bundle 'marijnh/tern_for_vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'bling/vim-airline'
 
 syntax on
 filetype plugin on
@@ -82,6 +82,9 @@ let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='light'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -90,6 +93,7 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
+set encoding=utf-8
 set completeopt=menuone,longest,preview
 
 " always show status bar
@@ -173,7 +177,7 @@ autocmd BufWritePre * let &backupext = '~@'
 "
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
-" set t_Co=256
+set t_Co=256
 color wombat256mod
 " color  distinguished
 "
@@ -196,6 +200,7 @@ autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
 autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
 autocmd BufWritePost *.py call Flake8()
 " autocmd FileType python compiler pylint
+
 
 " -----------------------------------------------------------------------------
 " Mapped Key Bindings
@@ -289,6 +294,3 @@ if 'VIRTUAL_ENV' in os.environ:
      activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
      execfile(activate_this, dict(__file__=activate_this))
 EOF
-
-
-
