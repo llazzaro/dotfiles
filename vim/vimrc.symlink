@@ -41,10 +41,10 @@ Bundle 'mattn/webapi-vim'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'bingaman/vim-sparkup.git'
-Bundle 'nvie/vim-flake8'
+" Bundle 'nvie/vim-flake8'
 " A Vim plugin which shows a git diff in the 'gutter'
 " Bundle 'airblade/vim-gitgutter'
-Bundle 'pyflakes.vim'
+" Bundle 'pyflakes.vim'
 " Bundle 'jelera/vim-javascript-syntax'
 " Bundle 'pangloss/vim-javascript'
 " Bundle 'nathanaelkane/vim-indent-guides'
@@ -52,17 +52,15 @@ Bundle 'pyflakes.vim'
 Bundle 'scrooloose/syntastic'
 " Bundle 'Valloric/YouCompleteMe'
 " Bundle 'marijnh/tern_for_vim'
+Bundle 'kchmck/vim-coffee-script'
 
 syntax on
 filetype plugin on
 filetype indent on
 
 let g:pyflakes_use_quickfix = 0
-autocmd BufWritePost *.py call Flake8()
-
 let g:flake8_ignore="E501,W293"
 let g:flake8_max_line_length=99
-
 " This does what it says on the tin. It will check your file on open too, not
 " just on save.
 " You might not want this, so just leave it out if you don't.
@@ -90,9 +88,6 @@ if iCanHazVundle == 0
     echo ""
     :BundleInstall
 endif
-
-" automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
 
 set completeopt=menuone,longest,preview
 
@@ -142,11 +137,6 @@ set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
 set autoindent
 set smartindent
 
-" tab spaces
-autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
-" autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
-autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
-
 
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
@@ -192,9 +182,19 @@ colorscheme desert
 " Hooks
 " -----------------------------------------------------------------------------
 
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+
 autocmd BufWritePre * :call Trim()
 autocmd BufNewFile,BufRead *.py compiler nose
 " autocmd FileType python autocmd BufWritePre <buffer> :call Indent()
+autocmd BufWritePre * let &backupext = '~@'
+" tab spaces
+autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
+" autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
+autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
+autocmd BufWritePost *.py call Flake8()
+" autocmd FileType python compiler pylint
 
 " -----------------------------------------------------------------------------
 " Mapped Key Bindings
@@ -222,7 +222,6 @@ nnoremap <leader>v :!mupdf %:r.pdf &<CR><CR>
 
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-" autocmd FileType python compiler pylint
 let g:user_zen_expandabbr_key = '<c-e>'
 
 " ctrl-p command
