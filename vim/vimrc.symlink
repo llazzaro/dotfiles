@@ -59,8 +59,6 @@ filetype plugin on
 filetype indent on
 
 let g:pyflakes_use_quickfix = 0
-let g:flake8_ignore="E501,W293"
-let g:flake8_max_line_length=99
 " This does what it says on the tin. It will check your file on open too, not
 " just on save.
 " You might not want this, so just leave it out if you don't.
@@ -73,7 +71,9 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
 let g:syntastic_auto_jump=1
-
+let g:syntastic_python_checkers=['flake8']
+let syntastic_python_flake8_args='--ignore=E501,E225,W293'
+let g:syntastic_python_checker_args='--ignore=E501,E225,W293'
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
 " YCM gives you popups and splits by default that some people might not like,
@@ -198,7 +198,7 @@ autocmd BufWritePre * let &backupext = '~@'
 autocmd Filetype html,htmldjango,handlebars setlocal ts=2 sts=2 sw=2
 " autocmd Filetype javascript,coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
 " autocmd FileType python compiler pylint
 
 
