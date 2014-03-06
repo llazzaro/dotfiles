@@ -1,22 +1,87 @@
+# use UTF8
+set -g utf8
+set-window-option -g utf8 on
+
+# make tmux display things in 256 colors
+set-option -g default-terminal "screen-256color"
+
+# shorten command delay
+set -sg escape-time 1
+
+# C-h and C-l to cycle thru panes
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
 # Set a Ctrl-b shortcut for reloading your tmux config
-bind r source-file ~/.tmux.conf
+# bind r source-file ~/.tmux.conf
 
-# Rename your terminals
-set -g set-titles on
-set -g set-titles-string '#(whoami)::#h::#(curl ipecho.net/plain;echo)'
-
+set-option -g pane-border-fg colour235
+set-option -g pane-active-border-fg colour240
+set-option -g message-bg black
+set-option -g message-fg brightred
 
 # Status bar customization
+set-option -g status on
 set -g status-utf8 on
+set -g status-interval 5
+set -g status-justify centre
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Status Bar
 set -g status-bg black
 set -g status-fg white
-set -g status-interval 5
-set -g status-left-length 90
-set -g status-right-length 60
-set -g status-left "#[fg=Green]#(whoami)#[fg=white]::#[fg=blue] \
-##(hostname - s)#[fg=white]::##[fg=yellow]#(curl ipecho.net/plain;echo)"
-set -g status-justify left
-set -g status-right '#[fg=Cyan]#S #[fg=white]%a %d %b %R'
+set -g status-interval 1
+set -g status-left '#[fg=green]#H#[default]'
+set -g status-right '#[fg=yellow]#(cut -d " " -f 1-4 /proc/loadavg)#[default] #[fg=cyan,bold]%Y-%m-%d %H:%M:%S#[default]'
 
 # use zsh as default shell
 set-option -g default-shell /bin/zsh
+
+# Remap window navigation to vim
+unbind-key j
+bind-key j select-pane -D
+unbind-key k
+bind-key k select-pane -U
+unbind-key h
+bind-key h select-pane -L
+unbind-key l
+bind-key l select-pane -R
+
+# Use vi keybindings for tmux commandline input.
+# # Note that to get command mode you need to hit ESC twice...
+set -g status-keys vi
+
+# No escape time for vi mode
+set -sg escape-time 0
+
+# Bigger history
+set -g history-limit 10000
+
+source ~/.powerline/powerline/bindings/tmux/powerline.conf
+
+# ---------------------
+# Copy & Paste
+# ---------------------
+# provide access to the clipboard for pbpaste, pbcopy
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-window-option -g automatic-rename on
+
+# use vim keybindings in copy mode
+setw -g mode-keys vi
+
+# setup 'v' to begin selection as in Vim
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Terminal emulator window title
+set -g set-titles on
+set -g set-titles-string '#S:#I.#P #W'
+
+# Notifying if other windows has activities
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Highlighting the active window in status bar
+setw -g window-status-current-bg red
+
