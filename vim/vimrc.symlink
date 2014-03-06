@@ -53,6 +53,7 @@ Bundle 'scrooloose/syntastic'
 " Bundle 'marijnh/tern_for_vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'bling/vim-airline'
+Bundle 'jmcantrell/vim-virtualenv'
 
 syntax on
 filetype plugin on
