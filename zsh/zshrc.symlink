@@ -86,3 +86,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 if [[ -r ~/.powerline/powerline/bindings/zsh/powerline.zsh ]]; then
     source ~/.powerline/powerline/bindings/zsh/powerline.zsh
 fi
+
+export MAKEFLAGS="-j$(grep -c ^processor /proc/cpuinfo)"
