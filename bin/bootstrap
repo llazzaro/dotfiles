@@ -69,16 +69,20 @@ install_npm() {
     curl -Lv https://npmjs.org/install.sh | sudo sh
 }
 
+install_virtualbox() {
+   cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+   cd -
+   sudo yum update
+   sudo yum install VirtualBox kmod-VirtualBox
+}
+
 
 install_deps() {
    detect_package_manager
 
    if [ "$package_manager" == "yum" ]
    then
-       cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-       cd -
        sudo yum update
-       sudo yum install VirtualBox kmod-VirtualBox
        sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
