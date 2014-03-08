@@ -3,7 +3,11 @@ set -g utf8
 set-window-option -g utf8 on
 
 # make tmux display things in 256 colors
-set-option -g default-terminal "screen-256color"
+set -g default-terminal screen-256color
+
+# Ring the bell if any background window rang a bell
+set -g bell-action any
+
 
 # shorten command delay
 set -sg escape-time 1
@@ -25,7 +29,7 @@ set-option -g status on
 set -g status-utf8 on
 set -g status-interval 5
 set -g status-justify centre
-setw -g monitor-activity on
+#setw -g monitor-activity on
 set -g visual-activity on
 
 # Status Bar
@@ -37,6 +41,13 @@ set -g status-right '#[fg=yellow]#(cut -d " " -f 1-4 /proc/loadavg)#[default] #[
 
 # use zsh as default shell
 set-option -g default-shell /bin/zsh
+
+
+# Create splits and vertical splits
+bind-key v split-window -h
+bind-key ^V split-window -h
+bind-key s split-window
+bind-key ^S split-window
 
 # Remap window navigation to vim
 unbind-key j
@@ -60,19 +71,23 @@ set -g history-limit 10000
 
 source ~/.powerline/powerline/bindings/tmux/powerline.conf
 
+# set first window to index 1 (not 0) to map more to the keyboard layout...
+set-option -g base-index 1
+set-window-option -g pane-base-index 1
+
 # ---------------------
 # Copy & Paste
 # ---------------------
 # provide access to the clipboard for pbpaste, pbcopy
-set-option -g default-command "reattach-to-user-namespace -l zsh"
-set-window-option -g automatic-rename on
+#set-option -g default-command "reattach-to-user-namespace -l zsh"
+#set-window-option -g automatic-rename on
 
 # use vim keybindings in copy mode
 setw -g mode-keys vi
 
 # setup 'v' to begin selection as in Vim
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+#bind-key -t vi-copy v begin-selection
+#bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Terminal emulator window title
 set -g set-titles on
@@ -85,3 +100,5 @@ set -g visual-activity on
 # Highlighting the active window in status bar
 setw -g window-status-current-bg red
 
+# Local config
+if-shell "[ -f ~/.tmux.conf.user ]" 'source ~/.tmux.conf.user'

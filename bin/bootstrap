@@ -76,6 +76,29 @@ install_virtualbox() {
    sudo yum install VirtualBox kmod-VirtualBox
 }
 
+compile_tmux() {
+
+    user ' - Do you want to compile tmux? (yes/no)'
+    read -e compile_vim
+    if [ "$compile_vim" == "yes" ]
+    then
+        wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+        tar xf libevent-2.0.21-stable.tar.gz
+        cd libevent-2.0.21-stable
+        ./configure
+        make
+        sudo make install
+        cd -
+        git clone git://git.code.sf.net/p/tmux/tmux-code /tmp/tmux-tmux-code
+        cd /tmp/tmux-tmux-code
+        ./autogen.sh
+        ./configure
+        make
+        sudo make install
+        cd -
+    fi
+}
+
 
 install_deps() {
    detect_package_manager
@@ -237,9 +260,10 @@ install_dotfiles () {
   done
 }
 
-install_deps
+#install_deps
 compile_vim
-setup_gitconfig
+compile_tmux
+#setup_gitconfig
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
