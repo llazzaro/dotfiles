@@ -32,9 +32,9 @@ function detect_package_manager
 case `uname` in
   Linux )
      LINUX=1
-     which yum && { package_manager=$(which yum);return; }
-     which zypper && { package_manager=$(which zypper);return; }
-     which apt-get && { package_manager=$(which apt-get);return; }
+     type yum >/dev/null 2>&1 && { package_manager='yum'; }
+     type apt-get >/dev/null 2>&1 && { package_manager='apt-get'; }
+     type zypper >/dev/null 2>&1 && { package_manager='zypper'; }
      ;;
   Darwin )
      DARWIN=1
@@ -43,6 +43,7 @@ case `uname` in
      # Handle AmigaOS, CPM, and modified cable modems here.
      ;;
 esac
+echo "Package manager detected is $package_manager"
 }
 
 install_oracle_java() {
@@ -56,11 +57,24 @@ install_oracle_java() {
     ln -s /opt/java/jdk1.7.0/jre/lib/amd64/libnpjp2.so ~/.mozzila/plugins/
 }
 
+install_npm() {
+    command -v node >/dev/null 2>&1 || {
+        git clone https://github.com/joyent/node.git /tmp/node
+        cd /tmp/node
+        ./configure
+        make
+        sudo make install
+    }
+    cd -
+    curl -Lv https://npmjs.org/install.sh | sudo sh
+}
+
+
 install_deps() {
    detect_package_manager
-   if [ "$package_manager" == "/bin/yum" ]
+
+   if [ "$package_manager" == "yum" ]
    then
-       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
        cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
        cd -
        sudo yum update
@@ -70,25 +84,39 @@ install_deps() {
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
        sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber
        sudo yum-builddep vim
-       sudo npm install -g jshint phantomjs casperjs coffeelint
-       wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
-       sudo easy_install pip
-       sudo pip install flake8
+   fi
+   if [ "$package_manager" == "apt-get" ]
+   then
+       sudo apt-get update
+       sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool
+   fi
+   sudo easy_install pip
+   sudo pip install flake8 virtualenv virtualenvwrapper
+   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+   wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
+   if [ ! -d "~/.powerline" ]
+   then
+       cd ~/.powerline
+       git pull
+       cd -
+       cd ~/.fonts
+       git pull
+       cd -
+   else
        mkdir -p ~/.powerline
        mkdir -p ~/.fonts
        mkdir -p ~/.config/fontconfig
        mkdir -p ~/.config/fontconfig/conf.d
        git clone https://github.com/Lokaltog/powerline.git ~/.powerline
        git clone https://github.com/Lokaltog/powerline-fonts.git ~/.fonts
-       cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
-       fc-cache -vf ~/.fonts
        sudo cp ~/.powerline/font/10-powerline-symbols.conf /etc/fonts/conf.d
    fi
-   if [ "$package_manager" == "/usr/bin/apt-get" ]
-   then
-       echo "not yet"
-       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-   fi
+
+   cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
+   fc-cache -vf ~/.fonts
+   install_npm
+   sudo npm install -g jshint phantomjs casperjs coffeelint
+
 }
 
 compile_vim() {
