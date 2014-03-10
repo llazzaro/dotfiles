@@ -88,3 +88,4 @@ if [[ -r ~/.powerline/powerline/bindings/zsh/powerline.zsh ]]; then
 fi
 
 export MAKEFLAGS="-j$(grep -c ^processor /proc/cpuinfo)"
+zstyle ':completion:*' special-dirs true
