@@ -5,7 +5,7 @@ This is my dotfiles configuration files.
 
 ## How to install configuration?
 
-sh -c "`curl -fsSL https://github.com/llazzaro/dotfiles/master/install.sh`"
+"`curl -L https://raw.github.com/llazzaro/dotfiles/master/install.sh  | sh`"
 
 ## Vim information
 
