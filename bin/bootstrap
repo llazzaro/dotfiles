@@ -257,6 +257,7 @@ install_dotfiles () {
       link_files $source $dest
     fi
     `cp -r vim/compiler ~/.vim/ `
+    `cp -r vim/colors ~/.vim/ `
   done
 }
 
