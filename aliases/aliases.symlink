@@ -16,3 +16,6 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 #  HTTP headers without fetching the actual content of the page
 alias icurl="curl -I"
+
+# Open ports per process
+alias open_ports="sudo netstat -tulpn"
