@@ -9,9 +9,6 @@
   frag = magenta bold
   old = red
   new = green
-[user]
-    name = Leonardo Lazzaro
-    email = lazzaroleonardo@gmail.com
 [alias]
     st = status -s
     ci = commit -am
