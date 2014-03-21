@@ -37,7 +37,7 @@ set -g status-bg black
 set -g status-fg white
 set -g status-interval 1
 set -g status-left '#[fg=green]#H#[default]'
-set -g status-right '#[fg=yellow]#(cut -d " " -f 1-4 /proc/loadavg)#[default] #[fg=cyan,bold]%Y-%m-%d %H:%M:%S#[default]'
+set -g status-right '#[fg=yellow]#(cut -d " " -f 1-4 /proc/loadavg)#[default] %H:%M:%S#[default]'
 
 # use zsh as default shell
 set-option -g default-shell /bin/zsh

@@ -107,7 +107,7 @@ install_deps() {
    then
        sudo yum update
        sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
-       sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers
+       sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
        sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber
        sudo yum-builddep vim
@@ -261,7 +261,13 @@ install_dotfiles () {
   done
 }
 
-#install_deps
+
+user ' - Do you want to install deps? (yes/no)'
+read -e deps
+if [ "$deps" == "yes" ]
+then
+  install_deps
+fi
 compile_vim
 compile_tmux
 #setup_gitconfig
