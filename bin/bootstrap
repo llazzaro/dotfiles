@@ -109,7 +109,7 @@ install_deps() {
        sudo yum install git mc libXt-devel libX11-devel gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
-       sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber
+       sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber ghc-xmonad-contrib-devel xmonad
        sudo yum-builddep vim
    fi
    if [ "$package_manager" == "apt-get" ]

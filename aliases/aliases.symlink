@@ -6,7 +6,8 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias tmux="tmux -2"
-alias ls="ls -la"
+alias ls="ls -a"
+alias find_big_files="du -a / | sort -n -r | head -n 10"
 
 # Get week number
 alias week='date +%V'
