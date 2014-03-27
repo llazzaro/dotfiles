@@ -26,7 +26,8 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-
+Bundle 'groenewege/vim-less'
+Bundle 'helino/vim-json'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-distinguished'
