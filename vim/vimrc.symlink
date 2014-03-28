@@ -55,6 +55,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'bling/vim-airline'
 Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'Glench/Vim-Jinja2-Syntax'
 
 syntax on
 filetype plugin on
