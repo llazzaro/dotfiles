@@ -110,7 +110,7 @@ install_deps() {
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
        sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber ghc-xmonad-contrib-devel xmonad
-       sudo yum install thunderbird wget zsh
+       sudo yum install thunderbird wget zsh gitflow
        sudo yum-builddep vim
    fi
    if [ "$package_manager" == "apt-get" ]
