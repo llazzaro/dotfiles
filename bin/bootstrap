@@ -110,7 +110,7 @@ install_deps() {
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
        sudo yum install libxslt-devel libxml2-devell nmap mupdf rubber ghc-xmonad-contrib-devel xmonad
-       sudo yum install thunderbird
+       sudo yum install thunderbird wget zsh
        sudo yum-builddep vim
    fi
    if [ "$package_manager" == "apt-get" ]
@@ -120,10 +120,10 @@ install_deps() {
    fi
    sudo easy_install pip
    sudo pip install flake8 virtualenv virtualenvwrapper
+   sudo pip install f git+https://github.com/Lokaltog/powerline.git
    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
-   if [ ! -d "~/.powerline" ]
-   then
+   if [ -d "~/.powerline" ]; then
        cd ~/.powerline
        git pull
        cd -
