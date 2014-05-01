@@ -1,10 +1,8 @@
-"A personal vim configuration vim for python code development
+"A personal vim configuration vim for python/php/javascript/coffeescript code development
 " NOTE: you cant use arrows, only hjkl is allowed
 
-" NOTE: It is important that the "pathogen#infect()" function is called before
-" the ":filetype on" command.
-
 " Invoke ":helptags" on all "doc" subdirectories in the "runtimepath" variable.
+"
 "
 set nocompatible
 " Vundle
@@ -24,7 +22,10 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
+" -----------------------------------------------------------------------------
+" Plugins
+" -----------------------------------------------------------------------------
+"
 Bundle 'gmarik/vundle'
 Bundle 'groenewege/vim-less'
 Bundle 'helino/vim-json'
@@ -57,9 +58,20 @@ Bundle 'bling/vim-airline'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
+" Installing plugins the first time
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
+
 syntax on
 filetype plugin on
 filetype indent on
+
+" -----------------------------------------------------------------------------
+" Plugins Configurations
+" -----------------------------------------------------------------------------
 
 let g:pyflakes_use_quickfix = 0
 " This does what it says on the tin. It will check your file on open too, not
@@ -75,6 +87,10 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
 let g:syntastic_auto_jump=1
 let g:syntastic_python_checkers=['flake8']
+" check also when just opened the file
+let g:syntastic_check_on_open = 1
+" don't put icons on the sign column (it hides the vcs status icons of signify)
+let g:syntastic_enable_signs = 0
 let syntastic_python_flake8_args='--ignore=E501,E225,W293'
 let g:syntastic_python_checker_args='--ignore=E501,E225,W293'
 " These are the tweaks I apply to YCM's config, you don't need them but they
@@ -88,13 +104,17 @@ set completeopt-=preview
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='light'
+" autofocus on tagbar open
+let g:tagbar_autofocus = 1
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
-" Installing plugins the first time
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
+let g:user_zen_expandabbr_key = '<c-e>'
+
+" ctrl-p command
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+
 
 set encoding=utf-8
 set completeopt=menuone,longest,preview
@@ -126,6 +146,9 @@ set wildignore=*.o,*.obj,*.a,*.lib,*.so,*.dll,*.exe,*.pyc,*.class,*.swp,*~
 " Indicate matching brackets when cursor is over them.
 set showmatch
 
+" when scrolling, keep cursor 3 lines away from screen border
+set scrolloff=3
+
 " -----------------------------------------------------------------------------
 " Editing
 " -----------------------------------------------------------------------------
@@ -133,8 +156,6 @@ set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising
 
 
 set pastetoggle=<F1>
-" Python PEP8 checker F5
-" let g:pep8_map= '<F5>'
 " -----------------------------------------------------------------------------
 " Indentation
 " -----------------------------------------------------------------------------
@@ -144,7 +165,10 @@ set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab 
 set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
 set autoindent
 set smartindent
-
+" tab length exceptions on some file types
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
@@ -163,16 +187,25 @@ set spelllang=en_us
 " Backup
 " -----------------------------------------------------------------------------
 
-" set writebackup
-" set backup
-" set backupcopy=yes
+set writebackup
+set backup
+set backupcopy=yes
 " set backupskip=
-" set backupdir=~/.backup
+set backupdir=~/.backup
+set swapfile
+set updatetime=2000
+set directory=~/.swap
+
+" create needed directories if they don't exist
+if !isdirectory(&backupdir)
+    call mkdir(&backupdir, "p")
+endif
+if !isdirectory(&directory)
+    call mkdir(&directory, "p")
+endif
+
 autocmd BufWritePre * let &backupext = '~@'
     \ . substitute(expand('%:p:h'), '[\\/:]', '%', 'g')
-" set swapfile
-" set updatetime=2000
-" set directory=~/.swap//
 
 " -----------------------------------------------------------------------------
 " Syntax Highlighting / Color Scheme
@@ -208,16 +241,15 @@ autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
 " -----------------------------------------------------------------------------
 " Mapped Key Bindings
 " -----------------------------------------------------------------------------
-"ai ts=4 sts=4 et sw=4 " python/django standard tab format
 "
-" map <F6> :set makeprg=python\ scripts/nosetests|:call MakeGreen<CR>
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
-map <F6> :call MakeGreen()<CR>
 map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
+map <F6> :call MakeGreen()<CR>
+map <F8> :TagbarToggle<CR>
 nmap ,g :GundoToggle<CR>
 nmap ,a <Esc>:Ack!
 map <leader>jt <Esc>:%!json_xs -f json -t json-pretty<CR>
@@ -225,17 +257,11 @@ imap <C-c> <CR><Esc>O
 
 " LaTeX (rubber) macro for compiling
 nnoremap <leader>c :w<CR>:!rubber --pdf --warn all %<CR>
-"
-" " View PDF macro; '%:r' is current file's root (base) name.
+
+" View PDF macro; '%:r' is current file's root (base) name.
 nnoremap <leader>v :!mupdf %:r.pdf &<CR><CR>
 
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
-
-let g:user_zen_expandabbr_key = '<c-e>'
-
-" ctrl-p command
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
 " Write file with sudo
 cmap w!! %!sudo tee > /dev/null %
@@ -245,6 +271,8 @@ cmap w!! %!sudo tee > /dev/null %
 " nmap <right> :3wincmd ><cr>
 " nmap <up>    :3wincmd +<cr>
 " nmap <down>  :3wincmd -<cr>
+"
+
 " -----------------------------------------------------------------------------
 " Custom Functions
 " -----------------------------------------------------------------------------
