@@ -1,3 +1,8 @@
+#---------------------------------------------------------------
+## file:     ~/.tmux/conf
+## author:   leonardo lazzaro - http://www.leonardolazzaro.com
+##---------------------------------------------------------------
+
 # use UTF8
 set -g utf8
 set-window-option -g utf8 on
@@ -16,9 +21,6 @@ set -sg escape-time 1
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
-# Set a Ctrl-b shortcut for reloading your tmux config
-# bind r source-file ~/.tmux.conf
-
 set-option -g pane-border-fg colour235
 set-option -g pane-active-border-fg colour240
 set-option -g message-bg black
@@ -26,6 +28,7 @@ set-option -g message-fg brightred
 
 # Status bar customization
 set-option -g status on
+set -g status-interval 2
 set -g status-utf8 on
 set -g status-interval 5
 set -g status-justify centre
@@ -42,12 +45,18 @@ set -g status-right '#[fg=yellow]#(cut -d " " -f 1-4 /proc/loadavg)#[default] %H
 # use zsh as default shell
 set-option -g default-shell /bin/zsh
 
+###
+#
+#       Keys bindings
+#
+###
+
+# Reload config files
+bind-key r source-file ~/.tmux.conf \;
 
 # Create splits and vertical splits
 bind-key v split-window -h
-bind-key ^V split-window -h
-bind-key s split-window
-bind-key ^S split-window
+bind-key h split-window
 
 # Remap window navigation to vim
 unbind-key j
