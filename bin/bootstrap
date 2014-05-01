@@ -99,8 +99,7 @@ compile_tmux() {
     fi
 }
 
-
-install_deps() {
+install_os_deps() {
    detect_package_manager
 
    if [ "$package_manager" == "yum" ]
@@ -118,6 +117,10 @@ install_deps() {
        sudo apt-get update
        sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool
    fi
+
+}
+
+install_deps() {
    sudo easy_install pip
    sudo pip install flake8 virtualenv virtualenvwrapper
    sudo pip install git+https://github.com/Lokaltog/powerline.git
