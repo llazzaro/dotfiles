@@ -122,21 +122,20 @@ let g:pyflakes_use_quickfix = 0
 " just on save.
 " You might not want this, so just leave it out if you don't.
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_jshint_conf="~/.jshintrc"
 let g:jshint_highlight_color = "Red"
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 " Better :sign interface symbols
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
 let g:syntastic_auto_jump=1
 let g:syntastic_python_checkers=['flake8']
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
-let syntastic_python_flake8_args='--ignore=E501,E225,W293'
-let g:syntastic_python_checker_args='--ignore=E501,E225,W293'
+let syntastic_python_flake8_args='--ignore=E501,E225,W293,E127,E128'
+let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E127,E128'
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
 " YCM gives you popups and splits by default that some people might not like,
@@ -357,6 +356,29 @@ endfunction
 function! Trim()
   call Preserve('%s/\s\+$//e')
 endfunction
+
+" Custom syntastic settings:
+function s:find_jshintrc(dir)
+    let l:found = globpath(a:dir, '.jshintrc')
+    if filereadable(l:found)
+        return l:found
+    endif
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:find_jshintrc(l:parent)
+    endif
+
+    return "~/.jshintrc"
+endfunction
+
+function UpdateJsHintConf()
+    let l:dir = expand('%:p:h')
+    let l:jshintrc = s:find_jshintrc(l:dir)
+    let g:syntastic_javascript_jshint_conf = l:jshintrc
+endfunction
+
+au BufEnter * call UpdateJsHintConf()
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
