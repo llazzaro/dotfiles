@@ -195,7 +195,9 @@ set scrolloff=3
 " -----------------------------------------------------------------------------
 " Editing
 " -----------------------------------------------------------------------------
-set backspace=indent,eol,start "Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
+
+" Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
+set backspace=indent,eol,start
 
 
 set pastetoggle=<F1>
@@ -212,6 +214,15 @@ set smartindent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" For 'make', tabs = tabs.
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+autocmd BufNewFile,BufEnter Makefile set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+autocmd BufNewFile,BufEnter *.mk set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+
+" Erlang
+autocmd FileType erlang set expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd BufNewFile,BufRead rebar.config set filetype=erlang
+autocmd BufNewFile,BufRead *.app.src set filetype=erlang
 
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
