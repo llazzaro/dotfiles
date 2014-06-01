@@ -208,8 +208,6 @@ set expandtab " insert space chars whenever a tab key is pressed
 set tabstop=4 " how many columns a tab counts for
 set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab is enabled)
 set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
-set autoindent
-set smartindent
 " tab length exceptions on some file types
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
