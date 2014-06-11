@@ -221,6 +221,8 @@ autocmd FileType erlang set expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd BufNewFile,BufRead rebar.config set filetype=erlang
 autocmd BufNewFile,BufRead *.app.src set filetype=erlang
 
+" Prolog
+autocmd Filetype pl set syntax=prolog
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
 " -----------------------------------------------------------------------------
