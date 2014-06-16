@@ -262,6 +262,8 @@ install_dotfiles () {
     fi
     `cp -r vim/compiler ~/.vim/ `
     `cp -r vim/colors ~/.vim/ `
+    `mkdir -p ~/.xmonad `
+    `cp -r xmonad/xmonad.hs ~/.xmonad/xmonad.hs `
   done
 }
 
