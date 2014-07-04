@@ -122,7 +122,7 @@ install_os_deps() {
 
 install_deps() {
    sudo easy_install pip
-   sudo pip install flake8 virtualenv virtualenvwrapper
+   sudo pip install flake8 virtualenv virtualenvwrapper vex
    sudo pip install git+https://github.com/Lokaltog/powerline.git
    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
