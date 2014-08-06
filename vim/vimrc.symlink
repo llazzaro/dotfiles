@@ -127,7 +127,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 " Better :sign interface symbols
-let g:syntastic_auto_jump=1
+let g:syntastic_auto_jump=0
 let g:syntastic_python_checkers=['flake8']
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
@@ -295,13 +295,18 @@ autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
 " Mapped Key Bindings
 " -----------------------------------------------------------------------------
 "
+"Easier mapleader than the default "\"
+let mapleader = ","
+
 nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
-map <F6> :call MakeGreen()<CR>
+map <F5> :call MakeGreen()<CR>
+map <F6> :py set_breakpoint()<CR>
+map <F7> :py remove_breakpoints()<CR>
 map <F8> :TagbarToggle<CR>
 nmap ,g :GundoToggle<CR>
 nmap ,a <Esc>:Ack!
@@ -392,6 +397,7 @@ au BufEnter * call UpdateJsHintConf()
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
+import re
 import os.path
 import sys
 import vim
@@ -400,4 +406,20 @@ if 'VIRTUAL_ENV' in os.environ:
      sys.path.insert(0, project_base_dir)
      activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
      execfile(activate_this, dict(__file__=activate_this))
+
+ipdb_breakpoint = 'import ipdb; ipdb.set_trace()'
+
+def set_breakpoint():
+    breakpoint_line = int(vim.eval('line(".")')) - 1
+
+    current_line = vim.current.line
+    white_spaces = re.search('^(\s*)', current_line).group(1)
+
+    vim.current.buffer.append(white_spaces + ipdb_breakpoint, breakpoint_line)
+
+
+def remove_breakpoints():
+    op = 'g/^.*%s.*/d' % ipdb_breakpoint
+    vim.command(op)
+
 EOF
