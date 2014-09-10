@@ -123,9 +123,11 @@ install_os_deps() {
 install_deps() {
    sudo easy_install pip
    sudo pip install flake8 virtualenv virtualenvwrapper vex
+   cp scripts/postactivate ~/.virtualenvs/postactivate
+   cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
    sudo pip install git+https://github.com/Lokaltog/powerline.git
    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-   curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
+   curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
    wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
    if [ -d "~/.powerline" ]; then
        cd ~/.powerline

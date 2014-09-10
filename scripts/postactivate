@@ -1,0 +1,16 @@
+#!/bin/bash
+# This hook is run after every virtualenv is activated.
+proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
+
+cd () {
+    if (( $# == 0 ))
+    then
+        builtin cd $HOME/projects/$proj_name
+    else
+        builtin cd "$@"
+    fi
+}
+
+cd
+
+ctags -f $VIRTUAL_ENV/tags -R $VIRTUAL_ENV/lib/python2.7/site-packages $VIRTUAL_ENV ${PWD} &> /dev/null & disown

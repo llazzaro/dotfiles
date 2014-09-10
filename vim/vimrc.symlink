@@ -56,6 +56,7 @@ Bundle 'bling/vim-airline'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'jaxbot/browserlink.vim'
+Bundle 'vim-scripts/EasyGrep'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -305,7 +306,11 @@ nmap <C-p> :bprev<CR>
 map <leader>a <Esc>:Ack!
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
-map <F5> :call MakeGreen()<CR>
+map <F4> :call MakeGreen()<CR>
+set tags=$VIRTUAL_ENV/tags,~/tags;/
+map <F5> :rightbelow vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" in addition to ctrl+] , i could press F5 to open up a vertical split in vim and
+" view the source code
 map <F6> :py set_breakpoint()<CR>
 map <F7> :py remove_breakpoints()<CR>
 map <F8> :TagbarToggle<CR>
