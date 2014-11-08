@@ -13,4 +13,4 @@ cd () {
 
 cd
 
-ctags -f $VIRTUAL_ENV/tags -R $VIRTUAL_ENV/lib/python2.7/site-packages $VIRTUAL_ENV ${PWD} &> /dev/null & disown
+# ctags -f $VIRTUAL_ENV/tags -R $VIRTUAL_ENV/lib/python2.7/site-packages $VIRTUAL_ENV ${PWD} &> /dev/null & disown
