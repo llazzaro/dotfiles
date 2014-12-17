@@ -10,6 +10,30 @@ alias ls="ls -a"
 alias find_big_files="du -a / | sort -n -r | head -n 10"
 alias find_images="find . -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image'"
 alias delete_pycs="find . -name \"*.pyc\" -exec rm -rf {} \;"
+alias ls='ls --color=auto'
+alias l='ls -lAh --color'
+# find a string in the git history
+alias gitsearch='git rev-list --all | xargs git grep -F'
+#ban ip
+function ban() {
+    if [ "`id -u`" == "0" ] ; then
+        iptables -A INPUT -s $1 -j DROP
+    else
+        sudo iptables -A INPUT -s $1 -j DROP
+    fi
+}
+
+#do a sudo command on the last command typed
+s(){
+    if [[ $# == 0 ]]; then
+        sudo $(history -p '!!')
+    else
+        sudo "$@"
+    fi
+}
+
+# python simplehhtp
+alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 
 # Get week number
 alias week='date +%V'
