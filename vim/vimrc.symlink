@@ -124,7 +124,7 @@ let g:pyflakes_use_quickfix = 0
 " just on save.
 " You might not want this, so just leave it out if you don't.
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_jshint_conf="~/.jshintrc"
+let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
 let g:jshint_highlight_color = "Red"
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
