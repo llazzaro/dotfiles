@@ -14,6 +14,7 @@ alias ls='ls --color=auto'
 alias l='ls -lAh --color'
 # find a string in the git history
 alias gitsearch='git rev-list --all | xargs git grep -F'
+alias rm="rm -i"
 #ban ip
 function ban() {
     if [ "`id -u`" == "0" ] ; then
