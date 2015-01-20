@@ -95,3 +95,7 @@ zstyle ':completion:*' special-dirs true
 
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
+
+# Report CPU usage for commands running longer than 2 seconds
+REPORTTIME=2
+
