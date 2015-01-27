@@ -56,7 +56,6 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'bling/vim-airline'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'jaxbot/browserlink.vim'
 Bundle 'vim-scripts/EasyGrep'
 
 " Installing plugins the first time
