@@ -1,22 +1,34 @@
+[include]
+  path = .gitconfig.local
 [color]
-  ui = true
+  ui = auto
 [color "branch"]
-  current = yellow reverse
+  current = red
   local = yellow
   remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red
-  new = green
+  meta = cyan
+  frag = magenta
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [alias]
-    st = status -s
-    ci = commit -am
-    amend = commit --amend            # ammend your last commit
-    l = log --graph --date=short
-    tags = tag -n                        # show tags with <n> lines of each tag message
-    unstage = reset HEAD # remove files from index (tracking)
-    uncommit = reset --soft HEAD^ # go back before last commit, with files in uncommitted state
+  st = status -sb
+  ci = commit -am
+  br = branch
+  lasttag = describe --tags --abbrev=0
+  slog = log --pretty=format:"%C(auto,yellow)%h%C(auto)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+  glog = log --graph --pretty=format:"%C(auto,yellow)%h%C(auto)%d\\ %C(auto,reset)%s\\ \\ [%C(auto,blue)%cn%C(auto,reset),\\ %C(auto,cyan)%ar%C(auto,reset)]"
+  gflog = log -p --cc --graph --decorate
+  uncommit = reset HEAD^
+  amend = commit --amend            # ammend your last commit
+  l = log --graph --date=short
+  tags = tag -n                        # show tags with <n> lines of each tag message
+  unstage = reset HEAD # remove files from index (tracking)
+  uncommit = reset --soft HEAD^ # go back before last commit, with files in uncommitted state
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [push]
@@ -24,7 +36,8 @@
   # the usual default is to push all branches
   default = tracking
 [core]
-	editor = vim -f
-[user]
-	email = lazzaroleonardo@gmail.com
-	name = Leonardo Lazzaro
+  editor = vim -f
+[diff]
+  algorithm = patience
+  excludesfile = ~/.gitignore
+  autocrlf = input
