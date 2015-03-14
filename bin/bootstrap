@@ -149,7 +149,7 @@ install_deps() {
    cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
    fc-cache -vf ~/.fonts
    install_npm
-   sudo npm install -g jshint phantomjs casperjs coffeelint
+   sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
 
 }
 

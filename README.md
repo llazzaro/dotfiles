@@ -11,9 +11,11 @@ This is my dotfiles configuration files.
 
 Supports the following languages
  * Python
+ * JSX Support (React.js)
  * Javascript
  * Coffee Script
 
 ## Contact
 
-Leonardo Lazzaro ( lazzaroleonardo@gmail.com )
+Leonardo Lazzaro ( leonardo@lazzaro.com.ar )
+www.lazzaro.com.ar
