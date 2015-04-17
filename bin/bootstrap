@@ -38,6 +38,7 @@ case `uname` in
      ;;
   Darwin )
      DARWIN=1
+     type brew >/dev/null 2>&1 && { package_manager='brew'; }
      ;;
   * )
      # Handle AmigaOS, CPM, and modified cable modems here.
@@ -118,18 +119,25 @@ install_os_deps() {
        sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool
    fi
 
+   if [ "$package_manager" == "brew" ]
+   then
+       brew install tmux wget
+   fi
 }
 
 install_deps() {
    sudo easy_install pip
-   sudo pip install flake8 virtualenv virtualenvwrapper vex
+   sudo pip install -U pip
+   pip install flake8 virtualenv virtualenvwrapper vex --user
+   # pip install git+https://github.com/Lokaltog/powerline.git --user
    cp scripts/postactivate ~/.virtualenvs/postactivate
    cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
-   sudo pip install git+https://github.com/Lokaltog/powerline.git
-   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-   curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
-   wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
-   if [ -d "~/.powerline" ]; then
+   if [ ! -d ~/.oh-my-zsh ]; then
+      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+   fi
+   # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
+   # wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
+   if [ -d ~/.powerline ]; then
        cd ~/.powerline
        git pull
        cd -
@@ -142,14 +150,16 @@ install_deps() {
        mkdir -p ~/.config/fontconfig
        mkdir -p ~/.config/fontconfig/conf.d
        git clone https://github.com/Lokaltog/powerline.git ~/.powerline
-       git clone https://github.com/Lokaltog/powerline-fonts.git ~/.fonts
-       sudo cp ~/.powerline/font/10-powerline-symbols.conf /etc/fonts/conf.d
+       if [ ! "$package_manager" == "brew" ]; then
+            git clone https://github.com/Lokaltog/powerline-fonts.git ~/.fonts
+            sudo cp ~/.powerline/font/10-powerline-symbols.conf /etc/fonts/conf.d
+            fc-cache -vf ~/.fonts
+            cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
+       fi
    fi
 
-   cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
-   fc-cache -vf ~/.fonts
-   install_npm
-   sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
+   # install_npm
+   # sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
 
 }
 
