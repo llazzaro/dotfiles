@@ -4,13 +4,10 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
 alias tmux="tmux -2"
-alias ls="ls -a"
 alias find_big_files="du -a / | sort -n -r | head -n 10"
 alias find_images="find . -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image'"
 alias delete_pycs="find . -name \"*.pyc\" -exec rm -rf {} \;"
-alias ls='ls --color=auto'
 alias l='ls -lAh --color'
 # find a string in the git history
 alias gitsearch='git rev-list --all | xargs git grep -F'
