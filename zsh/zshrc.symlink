@@ -68,7 +68,6 @@ source $ZSH/oh-my-zsh.sh
 
 #virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
 
 #fix vim colors
 export TERM=xterm-256color
@@ -98,4 +97,30 @@ zstyle ':completion:*' special-dirs true
 
 # Report CPU usage for commands running longer than 2 seconds
 REPORTTIME=2
+
+if [[ `uname` == 'Linux' ]]
+then
+        export LINUX=1
+        export GNU_USERLAND=1
+else
+        export LINUX=
+fi
+
+if [[ `uname` == 'Darwin' ]]
+then
+        export OSX=1
+else
+        export OSX=
+fi
+
+
+if [[ "$LINUX" == "1" ]]
+then
+    source /usr/bin/virtualenvwrapper.sh
+fi
+
+if [[ "$OSX" == "1" ]]
+then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
