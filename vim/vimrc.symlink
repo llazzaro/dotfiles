@@ -130,7 +130,7 @@ let g:pyflakes_use_quickfix = 0
 " This does what it says on the tin. It will check your file on open too, not
 " just on save.
 " You might not want this, so just leave it out if you don't.
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
 let g:jshint_highlight_color = "Red"
 let g:syntastic_check_on_open=1
@@ -166,7 +166,7 @@ let g:user_zen_expandabbr_key = '<c-e>'
 " ctrl-p command
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-
+let g:jsx_pragma_required = 1
 
 
 set encoding=utf-8
@@ -413,13 +413,13 @@ au BufEnter * call UpdateJsHintConf()
 
 function! RemoveFancyCharacters()
     let typo = {}
-    let typo["“"] = '"'
-    let typo["”"] = '"'
-    let typo["‘"] = "'"
-    let typo["’"] = "'"
-    let typo["–"] = '--'
-    let typo["—"] = '---'
-    let typo["…"] = '...'
+    let typo["""] = '"'
+    let typo["""] = '"'
+    let typo["'"] = "'"
+    let typo["'"] = "'"
+    let typo["--"] = '--'
+    let typo["---"] = '---'
+    let typo["..."] = '...'
     :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
 endfunction
 
