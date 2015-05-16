@@ -122,5 +122,7 @@ fi
 if [[ "$OSX" == "1" ]]
 then
     source /usr/local/bin/virtualenvwrapper.sh
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
 fi
 
