@@ -14,6 +14,11 @@ Supports the following languages
  * JSX Support (React.js)
  * Javascript
  * Coffee Script
+  
+## OS Support
+ * Ubuntu
+ * Fedora
+ * OSX
 
 ## Contact
 
