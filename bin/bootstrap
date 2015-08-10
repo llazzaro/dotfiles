@@ -157,7 +157,7 @@ install_deps() {
             cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
        fi
    fi
-
+   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
    # install_npm
    # sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
 
