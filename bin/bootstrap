@@ -71,14 +71,16 @@ install_npm() {
 }
 
 install_virtualbox() {
-   cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-   cd -
-   sudo yum update
-   sudo yum install VirtualBox kmod-VirtualBox
+  if [ "$package_manager" == "yum" ]
+   then
+      cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+      cd -
+      sudo yum update
+      sudo yum install VirtualBox kmod-VirtualBox
+   fi
 }
 
 compile_tmux() {
-
     user ' - Do you want to compile tmux? (yes/no)'
     read -e compile_vim
     if [ "$compile_vim" == "yes" ]
