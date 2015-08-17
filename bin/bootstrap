@@ -116,6 +116,7 @@ install_os_deps() {
    if [ "$package_manager" == "apt-get" ]
    then
        sudo apt-get update
+       sudo apt-get install python-setuptools
        sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool
    fi
 
@@ -126,6 +127,7 @@ install_os_deps() {
 }
 
 install_deps() {
+   install_os_deps
    sudo easy_install pip
    sudo pip install -U pip
    pip install flake8 virtualenv virtualenvwrapper vex --user
