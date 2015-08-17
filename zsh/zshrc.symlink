@@ -126,5 +126,6 @@ then
 fi
 
 ~/.local/bin/virtualenvwrapper.sh
+export PATH=$PATH:~/.local/bin
 export EDITOR=vim
 
