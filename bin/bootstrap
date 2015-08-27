@@ -124,7 +124,9 @@ install_os_deps() {
 
    if [ "$package_manager" == "brew" ]
    then
-       brew install tmux wget
+      brew install tmux wget python
+      # You must install vim after python so that it’ll compile with homebrew’s python.
+      brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
    fi
 }
 
@@ -136,6 +138,7 @@ install_deps() {
    pip install pyclewn --user
    python -c "import clewn; clewn.get_vimball()"
    vim -S pyclewn-2.1.vmb
+   pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    cp scripts/postactivate ~/.virtualenvs/postactivate
    cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
