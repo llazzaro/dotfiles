@@ -133,6 +133,7 @@ install_deps() {
    sudo easy_install pip
    sudo pip install -U pip
    pip install flake8 virtualenv virtualenvwrapper vex --user
+   pip install pyclewn --user
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    cp scripts/postactivate ~/.virtualenvs/postactivate
    cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
