@@ -134,6 +134,8 @@ install_deps() {
    sudo pip install -U pip
    pip install flake8 virtualenv virtualenvwrapper vex --user
    pip install pyclewn --user
+   python -c "import clewn; clewn.get_vimball()"
+   vim -S pyclewn-2.1.vmb
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    cp scripts/postactivate ~/.virtualenvs/postactivate
    cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
