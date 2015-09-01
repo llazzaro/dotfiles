@@ -135,7 +135,7 @@ install_deps() {
    sudo easy_install pip
    sudo pip install -U pip
    pip install flake8 virtualenv virtualenvwrapper vex --user
-   pip install pyclewn --user
+   pip install pyclewn mitmproxy --user
    python -c "import clewn; clewn.get_vimball()"
    vim -S pyclewn-2.1.vmb
    pip install --user powerline-status
