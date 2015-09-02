@@ -110,22 +110,22 @@ install_os_deps() {
        sudo yum update
        sudo yum install git mc gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
-       sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel nginx
+       sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel
        sudo yum install libxslt-devel libxml2-devell nmap
-       sudo yum install thunderbird wget zsh gitflow subversion ghc
+       sudo yum install wget zsh gitflow subversion ghc ack
        sudo yum-builddep vim
    fi
    if [ "$package_manager" == "apt-get" ]
    then
        sudo apt-get update
        sudo apt-get install python-setuptools
-       sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool
+       sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool hg ack-grep
    fi
 
    if [ "$package_manager" == "brew" ]
    then
       brew install tmux wget python
-      # You must install vim after python so that it’ll compile with homebrew’s python.
+      # You must install vim after python so that it'll compile with homebrew's python.
       brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
    fi
 }
@@ -140,8 +140,6 @@ install_deps() {
    vim -S pyclewn-2.1.vmb
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
-   cp scripts/postactivate ~/.virtualenvs/postactivate
-   cp scripts/postdeactivate ~/.virtualenvs/postdeactivate
    if [ ! -d ~/.oh-my-zsh ]; then
       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    fi
@@ -179,8 +177,10 @@ compile_vim() {
    read -e compile_vim
    if [ "$compile_vim" == "yes" ]
    then
+      sudo apt-get -y remove vim-common vim-runtime
+      sudo apt-get -y build-dep vim
       temp_dir=$(mktemp -d)
-      hg clone https://vim.googlecode.com/hg/ $temp_dir
+      git clone https://github.com/vim/vim.git $temp_dir
       cd $temp_dir
       ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
       make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim74
