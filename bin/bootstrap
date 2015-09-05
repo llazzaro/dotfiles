@@ -108,11 +108,11 @@ install_os_deps() {
    if [ "$package_manager" == "yum" ]
    then
        sudo yum update
-       sudo yum install git mc gcc-c++ ncurses-devel python-devel hg python-virtualenvwrapper.noarch htop npm
+       sudo yum install git mc gcc-c++ ncurses-devel python-devel python-virtualenvwrapper.noarch htop npm
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel
        sudo yum install libxslt-devel libxml2-devell nmap
-       sudo yum install wget zsh gitflow subversion ghc ack
+       sudo yum install wget zsh gitflow subversion ghc ack mercurial
        sudo yum-builddep vim
    fi
    if [ "$package_manager" == "apt-get" ]
