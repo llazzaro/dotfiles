@@ -92,7 +92,7 @@ compile_tmux() {
         make -j4
         sudo make install
         cd -
-        git clone git://git.code.sf.net/p/tmux/tmux-code /tmp/tmux-tmux-code
+        git clone https://github.com/tmux/tmux.git /tmp/tmux-tmux-code
         cd /tmp/tmux-tmux-code
         ./autogen.sh
         ./configure
