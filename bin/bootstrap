@@ -118,7 +118,7 @@ install_os_deps() {
    if [ "$package_manager" == "apt-get" ]
    then
        sudo apt-get update
-       sudo apt-get install python-setuptools
+       sudo apt-get -y install python-setuptools
        sudo apt-get -y install zsh git make nginx nmap git-core curl build-essential openssl libssl-dev autoconf automake libtool hg ack-grep
    fi
 
@@ -179,7 +179,7 @@ compile_vim() {
    then
       sudo apt-get -y remove vim-common vim-runtime
       sudo apt-get -y build-dep vim
-      temp_dir=$(mktemp -d)
+      temp_dir=$(mktemp -d)f
       git clone https://github.com/vim/vim.git $temp_dir
       cd $temp_dir
       ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
