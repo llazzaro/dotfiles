@@ -111,7 +111,7 @@ install_os_deps() {
        sudo yum install git mc gcc-c++ ncurses-devel python-devel python-virtualenvwrapper.noarch htop npm
        sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
        sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel
-       sudo yum install libxslt-devel libxml2-devell nmap
+       sudo yum install libxslt-devel libxml2-devell nmap libffi-devel
        sudo yum install wget zsh gitflow subversion ghc ack hg
        sudo yum-builddep vim
    fi
@@ -119,7 +119,7 @@ install_os_deps() {
    then
        sudo apt-get update
        sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev
-       sudo apt-get -y install zsh git make nmap git-core curl build-essential 
+       sudo apt-get -y install zsh git make nmap git-core curl build-essential libffi-dev
        sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial
    fi
 
