@@ -138,7 +138,9 @@ install_deps() {
    pip install flake8 virtualenv virtualenvwrapper vex --user
    pip install pyclewn mitmproxy --user
    python -c "import clewn; clewn.get_vimball()"
-   vim -S pyclewn-2.1.vmb
+   if command -v given-command > /dev/null 2>&1; then
+     vim -S pyclewn-2.1.vmb
+   fi
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
@@ -189,6 +191,7 @@ compile_vim() {
       mkdir -p $HOME/bin
       cd $HOME/bin
       ln -s $HOME/opt/vim/bin/vim
+      vim -S pyclewn-2.1.vmb
    fi
 
 }
