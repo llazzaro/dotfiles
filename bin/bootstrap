@@ -63,7 +63,7 @@ install_npm() {
         git clone https://github.com/joyent/node.git /tmp/node
         cd /tmp/node
         ./configure
-        make
+        make -j4
         sudo make install
     }
     cd -
@@ -89,14 +89,14 @@ compile_tmux() {
         tar xf libevent-2.0.21-stable.tar.gz
         cd libevent-2.0.21-stable
         ./configure
-        make
+        make -j4
         sudo make install
         cd -
         git clone git://git.code.sf.net/p/tmux/tmux-code /tmp/tmux-tmux-code
         cd /tmp/tmux-tmux-code
         ./autogen.sh
         ./configure
-        make
+        make -j4
         sudo make install
         cd -
     fi
@@ -186,7 +186,7 @@ compile_vim() {
       git clone https://github.com/vim/vim.git $temp_dir
       cd $temp_dir
       ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
-      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim74
+      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim74 -j4
       make install
       mkdir -p $HOME/bin
       cd $HOME/bin
