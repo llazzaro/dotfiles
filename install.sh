@@ -1,11 +1,12 @@
 #!/bin/sh
 
 if [ ! -d "$HOME/.dotfiles" ]; then
-    echo "Installing dotfiles for the first time"
-    git clone https://github.com/llazzaro/dotfiles.git "$HOME/.dotfiles"
-    cd "$HOME/.dotfiles"
-    [ "$1" == "ask" ] && export ASK="true"
-    bin/bootstrap
+  echo "Installing dotfiles for the first time"
+  git clone https://github.com/llazzaro/dotfiles.git "$HOME/.dotfiles"
 else
-    echo "Dotfiles is already installed"
+  echo "Updating dotfiles\n"
+  cd "$HOME/.dotfiles" && git pull
 fi
+
+cd "$HOME/.dotfiles"
+bin/bootstrap
