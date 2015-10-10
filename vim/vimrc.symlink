@@ -202,6 +202,7 @@ set showmatch
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
 
+set lazyredraw          " redraw only when we need to.
 " -----------------------------------------------------------------------------
 " Editing
 " -----------------------------------------------------------------------------
