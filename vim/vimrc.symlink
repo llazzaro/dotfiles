@@ -58,7 +58,9 @@ Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'vim-scripts/EasyGrep'
 Bundle 'osyo-manga/vim-over'
 Bundle 'tpope/vim-speeddating'
-Bundle 'mhinz/vim-signify'
+" Bundle 'mhinz/vim-signify'
+Bundle 'mhinz/vim-tmuxify'
+Bundle 'mhinz/vim-startify'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
