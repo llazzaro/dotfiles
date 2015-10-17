@@ -114,6 +114,7 @@ install_os_deps() {
        sudo yum install libxslt-devel libxml2-devell nmap libffi-devel
        sudo yum install wget zsh gitflow subversion ghc ack hg
        sudo yum-builddep vim
+       yum install xclip
    fi
    if [ "$package_manager" == "apt-get" ]
    then
@@ -121,11 +122,13 @@ install_os_deps() {
        sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev
        sudo apt-get -y install zsh git make nmap git-core curl build-essential libffi-dev
        sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial
+       sudo apt-get install xclip
    fi
 
    if [ "$package_manager" == "brew" ]
    then
       brew install tmux wget python
+      brew install reattach-to-user-namespace
       # You must install vim after python so that it'll compile with homebrew's python.
       brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
    fi
