@@ -117,6 +117,7 @@ set -g set-titles-string '#S:#I.#P #W'
 # Notifying if other windows has activities
 setw -g monitor-activity on
 set -g visual-activity on
+set -g @shell_mode 'vi'
 
 # Highlighting the active window in status bar
 setw -g window-status-current-bg red
