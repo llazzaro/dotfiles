@@ -123,6 +123,7 @@ if [[ "$OSX" == "1" ]]
 then
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
+    export PYENV_ROOT=/usr/local/var/pyenv
 fi
 
 source ~/.local/bin/virtualenvwrapper.sh
