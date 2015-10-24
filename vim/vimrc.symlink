@@ -60,6 +60,7 @@ Bundle 'tpope/vim-speeddating'
 " Bundle 'mhinz/vim-signify'
 " Bundle 'mhinz/vim-tmuxify'
 " Bundle 'mhinz/vim-startify'
+Bundle 'vim-utils/vim-troll-stopper'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
