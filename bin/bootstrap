@@ -128,7 +128,8 @@ install_os_deps() {
    if [ "$package_manager" == "brew" ]
    then
       brew install tmux wget python
-      brew install reattach-to-user-namespace
+      brew install reattach-to-user-namespace 
+      brew install pyenv-virtualenvwrapper
       # You must install vim after python so that it'll compile with homebrew's python.
       brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
    fi
