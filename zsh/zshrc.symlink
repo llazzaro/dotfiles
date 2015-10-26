@@ -116,6 +116,7 @@ fi
 
 if [[ "$LINUX" == "1" ]]
 then
+    source ~/.local/bin/virtualenvwrapper.sh
     export LC_CTYPE=en_US.UTF-8
 fi
 
@@ -124,9 +125,9 @@ then
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
     export PYENV_ROOT=/usr/local/var/pyenv
+    source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-source ~/.local/bin/virtualenvwrapper.sh
 export PATH=$PATH:~/.local/bin
 export EDITOR=vim
 
