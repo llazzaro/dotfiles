@@ -130,4 +130,5 @@ fi
 
 export PATH=$PATH:~/.local/bin
 export EDITOR=vim
-
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

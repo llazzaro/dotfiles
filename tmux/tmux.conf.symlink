@@ -28,16 +28,15 @@ set-option -g message-fg brightred
 
 # Status bar customization
 set-option -g status on
-set -g status-interval 2
 set -g status-utf8 on
 set -g status-interval 5
 set -g status-justify centre
-#setw -g monitor-activity on
+setw -g monitor-activity on
 set -g visual-activity on
 
 # Status Bar
 #source ~/.powerline/powerline/bindings/tmux/powerline.conf
-set -g status-interval 1
+#set -g status-interval 1
 set -g status-fg colour231
 set -g status-bg colour234
 set -g status-left-length 20
