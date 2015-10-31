@@ -125,9 +125,11 @@ then
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
     export PYENV_ROOT=/usr/local/var/pyenv
+    
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+export ANSIBLE_HOSTS=~/.ansible/hosts
 export PATH=$PATH:~/.local/bin
 export EDITOR=vim
 eval "$(pyenv init -)"
