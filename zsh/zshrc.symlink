@@ -129,6 +129,7 @@ then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+export ANSIBLE_CONFIG=~/.ansible/ansible.cfg
 export ANSIBLE_HOSTS=~/.ansible/hosts
 export PATH=$PATH:~/.local/bin
 export EDITOR=vim
