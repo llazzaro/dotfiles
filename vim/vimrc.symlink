@@ -171,20 +171,21 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:jsx_pragma_required = 1
 
-
 set encoding=utf-8
 set completeopt=menuone,longest,preview
 
 " always show status bar
 set ls=2
 
-"hide buffers instead of closing them this means that the current buffer can be put to background without being written; and that marks and undo history are preserved
-set hidden
-set undolevels=1000
-set background=dark
 " -----------------------------------------------------------------------------
 " GUI / Look & Feel
 " -----------------------------------------------------------------------------
+
+" hide buffers instead of closing them this means that the current buffer 
+" can be put to background without being written; and that marks and undo history are preserved
+set hidden
+set undolevels=1000
+set background=dark
 
 " The title of the window is determined by the "titlestring" variable.
 set title
@@ -214,7 +215,6 @@ set lazyredraw          " redraw only when we need to.
 set backspace=indent,eol,start
 
 
-set pastetoggle=<F1>
 " -----------------------------------------------------------------------------
 " Indentation
 " -----------------------------------------------------------------------------
@@ -318,6 +318,7 @@ nmap <C-e> :e#<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 map <leader>a <Esc>:Ack!
+set pastetoggle=<F1>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :Ack!
 map <F4> :call MakeGreen()<CR>
