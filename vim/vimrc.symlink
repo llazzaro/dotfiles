@@ -62,6 +62,7 @@ Bundle 'tpope/vim-speeddating'
 " Bundle 'mhinz/vim-startify'
 Bundle 'vim-utils/vim-troll-stopper'
 Bundle 'gotcha/vimpdb'
+Bundle 'vimgineers/vim-hugefile'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
