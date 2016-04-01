@@ -121,7 +121,7 @@ install_os_deps() {
        sudo apt-get update
        sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev fontconfig
        sudo apt-get -y install zsh git make nmap git-core curl build-essential libffi-dev
-       sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial
+       sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial docker
        sudo apt-get build-dep python-imaging
        sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
        sudo apt-get install xclip
