@@ -138,23 +138,18 @@ install_os_deps() {
    fi
 }
 
-install_deps() {
-   install_os_deps
-   sudo easy_install pip
-   sudo pip install -U pip
-   pip install flake8 virtualenv virtualenvwrapper vex --user
-   pip install pyclewn mitmproxy --user
-   python -c "import clewn; clewn.get_vimball()"
-   if command -v given-command > /dev/null 2>&1; then
-     vim -S pyclewn-2.1.vmb
-   fi
-   pip install --user powerline-status
-   # pip install git+https://github.com/Lokaltog/powerline.git --user
-   if [ ! -d ~/.oh-my-zsh ]; then
-      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-   fi
-   # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
-   # wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
+install_pyenv() {
+    if [ -d ~/.powerline ]; then
+        cd ~/.pyenv
+        git pull
+        cd
+    else
+        git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+        git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+    fi
+}
+
+install_powerlinefonts() {
    if [ -d ~/.powerline ]; then
        cd ~/.powerline
        git pull
@@ -175,8 +170,34 @@ install_deps() {
             cp ~/.powerline/font/PowerlineSymbols.otf ~/.fonts
        fi
    fi
-   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-   git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+}
+
+install_tmux_plugins() {
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+}
+
+install_deps() {
+   install_os_deps
+   sudo easy_install pip
+   sudo pip install -U pip
+   pip install flake8 virtualenv virtualenvwrapper vex --user
+   pip install pyclewn mitmproxy --user
+   python -c "import clewn; clewn.get_vimball()"
+   if command -v given-command > /dev/null 2>&1; then
+     vim -S pyclewn-2.1.vmb
+   fi
+   pip install --user powerline-status
+   # pip install git+https://github.com/Lokaltog/powerline.git --user
+   if [ ! -d ~/.oh-my-zsh ]; then
+      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+   fi
+   # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
+   # wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
+   install_powerlinefonts
+   install_pyenv
+   install_tmux_plugins
    # install_npm
    # sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
 
