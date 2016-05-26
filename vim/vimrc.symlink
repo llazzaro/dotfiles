@@ -41,6 +41,7 @@ Bundle 'fholgado/minibufexpl.vim'
 " Bundle 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'mxw/vim-jsx.git'
+Bundle 'vim-airline/vim-airline-themes'
 " A Vim plugin which shows a git diff in the 'gutter'
 " Bundle 'airblade/vim-gitgutter'
 " Bundle 'pyflakes.vim'
@@ -259,11 +260,8 @@ set spelllang=en_us
 set writebackup
 set backup
 set backupcopy=yes
-" set backupskip=
-set backupdir=~/.backup
 set swapfile
 set updatetime=2000
-set directory=~/.swap
 
 " create needed directories if they don't exist
 if !isdirectory(&backupdir)
@@ -273,6 +271,8 @@ if !isdirectory(&directory)
     call mkdir(&directory, "p")
 endif
 
+set backupdir=~/.backup
+set directory=~/.swap
 autocmd BufWritePre * let &backupext = '~@'
     \ . substitute(expand('%:p:h'), '[\\/:]', '%', 'g')
 
