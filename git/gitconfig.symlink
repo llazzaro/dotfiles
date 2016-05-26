@@ -41,3 +41,6 @@
   algorithm = patience
   excludesfile = ~/.gitignore
   autocrlf = input
+[user]
+	email = llazzaro@dc.uba.ar
+	name = Leonardo Lazzaro

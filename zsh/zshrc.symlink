@@ -116,7 +116,9 @@ fi
 
 if [[ "$LINUX" == "1" ]]
 then
-    source ~/.local/bin/virtualenvwrapper.sh
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source /usr/local/bin/virtualenvwrapper.sh
     export LC_CTYPE=en_US.UTF-8
 fi
 
