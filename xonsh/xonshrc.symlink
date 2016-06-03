@@ -1,0 +1,18 @@
+
+
+def _workon(args, stdin=None):
+    venv = args[0]
+    venv_path = os.path.join($HOME, '.virtualenvs', venv)
+    if not os.path.exists(venv_path):
+        raise OSError("No such virtualenv: %s", venv_path)
+    $PATH = [ os.path.join(venv_path, 'bin') ] + _ORIG_PATH
+    $VIRTUAL_ENV = venv_path
+    $PROMPT = "(%s)" % venv + _ORIG_PROMPT
+
+def _deactivate(args, stdin=None):
+    del $VIRTUAL_ENV
+    $PATH = list(_ORIG_PATH)
+    $PROMPT = _ORIG_PROMPT
+
+aliases['workon'] = _workon
+aliases['deactivate'] = _deactivate
