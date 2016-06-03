@@ -149,6 +149,20 @@ install_pyenv() {
     fi
 }
 
+install_python_deps() {
+   sudo easy_install pip
+   sudo pip install -U pip
+   pip install flake8 virtualenv virtualenvwrapper vex --user
+   pip install pyclewn mitmproxy --user
+   python -c "import clewn; clewn.get_vimball()"
+   if command -v given-command > /dev/null 2>&1; then
+     vim -S pyclewn-2.1.vmb
+   fi
+   pip install --user powerline-status
+   conda install -c conda-forge xonsh
+   sudo chsh -s $(which xonsh)
+}
+
 install_powerlinefonts() {
    if [ -d ~/.powerline ]; then
        cd ~/.powerline
@@ -324,11 +338,18 @@ install_dotfiles () {
 }
 
 
-user ' - Do you want to install deps? (yes/no)'
+user ' - Do you want to install OS deps? (yes/no)'
 read -e deps
 if [ "$deps" == "yes" ]
 then
   install_deps
+fi
+
+user ' - Do you want to install python deps? (yes/no)'
+read -e deps
+if [ "$deps" == "yes" ]
+then
+  install_python_deps
 fi
 compile_vim
 compile_tmux
