@@ -371,6 +371,16 @@ cmap w!! %!sudo tee > /dev/null %
 " Re-indent the whole buffer.
 " Restore cursor position, window position, and last search after running a
 " command.
+" Auto add head info
+" .py file auto add header
+function HeaderPython()
+    call setline(1, "# -*- coding: utf-8 -*-")
+    call append(1,  "# Leonardo Lazzaro @ " . strftime('%Y-%m-%d', localtime()))
+    normal G
+    normal o
+endf
+autocmd bufnewfile *.py call HeaderPython()
+
 function! Preserve(command)
   " Save the last search.
   let search = @/
