@@ -41,6 +41,9 @@
   algorithm = patience
   excludesfile = ~/.gitignore
   autocrlf = input
+  tool = vimdiff
+[merge]
+  tool = vimdiff
 [user]
-	email = llazzaro@dc.uba.ar
-	name = Leonardo Lazzaro
+  email = llazzaro@dc.uba.ar
+  name = Leonardo Lazzaro
