@@ -146,3 +146,23 @@ eval "$(pyenv virtualenv-init -)"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# avoids freezing the terminal when using ctrl-s
+alias vim="stty stop '' -ixoff ; vim"
+# `Frozing' tty, so after any command terminal settings will be restored
+ttyctl -f
+
+# bash
+# No ttyctl, so we need to save and then restore terminal settings
+vim()
+{
+    # osx users, use stty -g
+    local STTYOPTS="$(stty --save)"
+    if [[ "$OSX" == "1" ]]
+    then
+        local STTYOPTS="$(stty -g)"
+    fi
+    stty stop '' -ixoff
+    command vim "$@"
+    stty "$STTYOPTS"
+}
