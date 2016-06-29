@@ -9,6 +9,9 @@ alias find_big_files="du -a / | sort -n -r | head -n 10"
 alias find_images="find . -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image'"
 alias delete_pycs="find . -name \"*.pyc\" -exec rm -rf {} \;"
 alias l='ls -lAh --color'
+alias 'weather'='curl -k4 http://wttr.in/Milan'
+alias 'mkdir'='mkdir -p'
+alias 'download-music'='youtube-dl -x --audio-quality 0 --audio-format mp3'
 # find a string in the git history
 alias gitsearch='git rev-list --all | xargs git grep -F'
 alias rm="rm -i"
