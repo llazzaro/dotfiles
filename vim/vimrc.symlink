@@ -262,6 +262,8 @@ set backup
 set backupcopy=yes
 set swapfile
 set updatetime=2000
+set backupdir=~/.backup
+set directory=~/.swap
 
 " create needed directories if they don't exist
 if !isdirectory(&backupdir)
@@ -271,8 +273,7 @@ if !isdirectory(&directory)
     call mkdir(&directory, "p")
 endif
 
-set backupdir=~/.backup
-set directory=~/.swap
+
 autocmd BufWritePre * let &backupext = '~@'
     \ . substitute(expand('%:p:h'), '[\\/:]', '%', 'g')
 
