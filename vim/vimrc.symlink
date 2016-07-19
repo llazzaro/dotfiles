@@ -256,26 +256,7 @@ set spelllang=en_us
 " -----------------------------------------------------------------------------
 " Backup
 " -----------------------------------------------------------------------------
-
-set writebackup
-set backup
-set backupcopy=yes
-set swapfile
-set updatetime=2000
-set backupdir=~/.backup
-set directory=~/.swap
-
-" create needed directories if they don't exist
-if !isdirectory(&backupdir)
-    call mkdir(&backupdir, "p")
-endif
-if !isdirectory(&directory)
-    call mkdir(&directory, "p")
-endif
-
-
-autocmd BufWritePre * let &backupext = '~@'
-    \ . substitute(expand('%:p:h'), '[\\/:]', '%', 'g')
+" removed due to too many problems
 
 " -----------------------------------------------------------------------------
 " Syntax Highlighting / Color Scheme
