@@ -119,6 +119,7 @@ install_os_deps() {
    if [ "$package_manager" == "apt-get" ]
    then
        sudo apt-get update
+       sudo apt-get -y install python-flake8 python3-flake8
        sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev fontconfig vim
        sudo apt-get -y install zsh git make nmap git-core curl build-essential libffi-dev tmux iotop
        sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial docker htop
