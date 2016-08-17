@@ -179,6 +179,9 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:jsx_pragma_required = 1
 
+let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
+let g:ctrlsf_auto_close = 0
+
 set encoding=utf-8
 set completeopt=menuone,longest,preview
 
