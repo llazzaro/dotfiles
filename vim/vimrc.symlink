@@ -187,7 +187,7 @@ set completeopt=menuone,longest,preview
 
 " always show status bar
 set ls=2
-let g:syntastic_python_flake8_exe='~/.vim/flake8.sh'
+let g:syntastic_python_flake8_exe='~/.flake8.sh'
 
 
 " -----------------------------------------------------------------------------
