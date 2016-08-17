@@ -33,6 +33,12 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
+"Monokai theme
+Bundle 'sickill/vim-monokai'
+" Search inside files
+Bundle 'dyng/ctrlsf.vim'
+"devicons
+Bundle 'ryanoasis/vim-devicons'
 " Bundle 'reinh/vim-makegreen'
 Bundle 'kien/tabman.vim'
 Bundle 'tpope/vim-fugitive'
@@ -185,9 +191,12 @@ set ls=2
 
 " hide buffers instead of closing them this means that the current buffer 
 " can be put to background without being written; and that marks and undo history are preserved
+
+colorscheme monokai
 set hidden
 set undolevels=1000
 set background=dark
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
 
 " The title of the window is determined by the "titlestring" variable.
 set title
@@ -252,23 +261,6 @@ set hlsearch
 
 " Use the following dictionaries for spell checking.
 set spelllang=en_us
-
-" -----------------------------------------------------------------------------
-" Backup
-" -----------------------------------------------------------------------------
-" removed due to too many problems
-
-" -----------------------------------------------------------------------------
-" Syntax Highlighting / Color Scheme
-" -----------------------------------------------------------------------------
-"
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
-set t_Co=256
-color wombat256mod
-" color  distinguished
-"
-colorscheme desert
 
 " -----------------------------------------------------------------------------
 " Hooks
