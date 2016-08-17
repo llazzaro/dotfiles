@@ -199,6 +199,8 @@ install_deps() {
    sudo pip install -U pip
    pip install flake8 virtualenv virtualenvwrapper vex --user
    pip install pyclewn mitmproxy --user
+   git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+   git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
    python -c "import clewn; clewn.get_vimball()"
    if command -v given-command > /dev/null 2>&1; then
      vim -S pyclewn-2.1.vmb
@@ -369,5 +371,4 @@ then
   fi
 fi
 
-echo ''
 echo '  All installed!'
