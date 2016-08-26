@@ -194,7 +194,7 @@ let g:syntastic_python_flake8_exe='~/.flake8.sh'
 " GUI / Look & Feel
 " -----------------------------------------------------------------------------
 
-" hide buffers instead of closing them this means that the current buffer 
+" hide buffers instead of closing them this means that the current buffer
 " can be put to background without being written; and that marks and undo history are preserved
 
 colorscheme monokai
@@ -275,7 +275,6 @@ set spelllang=en_us
 au BufWritePost .vimrc so ~/.vimrc
 
 autocmd BufWritePre * :call Trim()
-autocmd BufWritePre * :call RemoveFancyCharacters()
 autocmd BufNewFile,BufRead *.py compiler nose
 " autocmd FileType python autocmd BufWritePre <buffer> :call Indent()
 autocmd BufWritePre * let &backupext = '~@'
@@ -297,7 +296,7 @@ let mapleader = ","
 " use ctrl-s to save files
 " If the current buffer has never been saved, it will have no name,
 " call the file browser to save it, otherwise just save it.
-command -nargs=0 -bar Update if &modified 
+command -nargs=0 -bar Update if &modified
                            \|    if empty(bufname('%'))
                            \|        browse confirm write
                            \|    else
@@ -417,19 +416,6 @@ function UpdateJsHintConf()
 endfunction
 
 au BufEnter * call UpdateJsHintConf()
-
-function! RemoveFancyCharacters()
-    let typo = {}
-    let typo["“"] = '"'
-    let typo["”"] = '"'
-    let typo["‘"] = "'"
-    let typo["’"] = "'"
-    let typo["–"] = '--'
-    let typo["—"] = '---'
-    let typo["…"] = '...'
-    :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
-endfunction
-
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
