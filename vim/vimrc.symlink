@@ -230,6 +230,11 @@ set lazyredraw          " redraw only when we need to.
 " Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
 set backspace=indent,eol,start
 
+" Uncomment below to prevent 'tilde backup files' (eg. myfile.txt~) from being created
+set nobackup
+
+" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being created
+set noswapfile
 
 " -----------------------------------------------------------------------------
 " Indentation
