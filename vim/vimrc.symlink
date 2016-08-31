@@ -149,7 +149,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 " Better :sign interface symbols
 let g:syntastic_auto_jump=0
-let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checkers=['flake8', 'pylint']
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
