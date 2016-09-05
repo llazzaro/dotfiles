@@ -123,10 +123,11 @@ then
     export LC_ALL=C
 fi
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 if [[ "$OSX" == "1" ]]
 then
-    export LC_ALL=en_US.UTF-8
-    export LANG=en_US.UTF-8
     export PYENV_ROOT=/usr/local/var/pyenv
     export LD_LIBRARY_PATH=/usr/local/Cellar/gcc/5.2.0/lib/gcc/5/libgfortran.a
     source /usr/local/bin/virtualenvwrapper.sh

@@ -154,8 +154,8 @@ let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
-let syntastic_python_flake8_args='--ignore=E501,E225,W293,E126,E127,E128'
-let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E126,E127,E128'
+let syntastic_python_flake8_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
+let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
 " YCM gives you popups and splits by default that some people might not like,
