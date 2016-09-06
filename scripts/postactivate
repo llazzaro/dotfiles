@@ -5,7 +5,7 @@ proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
 cd () {
     if (( $# == 0 ))
     then
-        builtin cd $HOME/projects/$proj_name
+        builtin cd $HOME/workspace/$proj_name
     else
         builtin cd "$@"
     fi
