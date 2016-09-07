@@ -47,3 +47,5 @@
 [user]
   email = llazzaro@dc.uba.ar
   name = Leonardo Lazzaro
+[commit]
+	gpgsign = true
