@@ -61,6 +61,9 @@ Bundle 'othree/html5.vim'
 Bundle 'jelera/vim-javascript-syntax'
 " nodejs
 Bundle 'moll/vim-node' 
+Bundle 'terryma/vim-expand-region'
+Bundle 'skalnik/vim-vroom'
+
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -317,7 +320,8 @@ autocmd Filetype css,less,sass,scss,stylus setlocal ts=2 sts=2 sw=2
 " -----------------------------------------------------------------------------
 "
 "Easier mapleader than the default "\"
-let mapleader = ","
+let mapleader = "\<Space>"
+
 
 " use ctrl-s to save files
 " If the current buffer has never been saved, it will have no name,
@@ -368,6 +372,18 @@ cmap w!! %!sudo tee > /dev/null %
 " nmap <up>    :3wincmd +<cr>
 " nmap <down>  :3wincmd -<cr>
 "
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+nmap <Leader><Leader> V
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " -----------------------------------------------------------------------------
 " Custom Functions
