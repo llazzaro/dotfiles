@@ -47,5 +47,6 @@
 [user]
   email = llazzaro@dc.uba.ar
   name = Leonardo Lazzaro
+	signingkey = C95B1052
 [commit]
 	gpgsign = true
