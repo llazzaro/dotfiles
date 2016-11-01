@@ -47,7 +47,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session
 
-export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
 zstyle ':completion:*' special-dirs true
 
 # Report CPU usage for commands running longer than 2 seconds
@@ -71,6 +70,7 @@ fi
 
 if [[ "$LINUX" == "1" ]]
 then
+    export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/Devel
     source /usr/local/bin/virtualenvwrapper.sh
