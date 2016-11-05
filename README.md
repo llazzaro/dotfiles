@@ -4,7 +4,7 @@ This is my dotfiles configuration files.
 
 
 ## How to install configuration?
-
+`sudo apt-get install git vim`
 `curl -L https://raw.github.com/llazzaro/dotfiles/master/install.sh  | sh`
 
 ## Vim information
