@@ -27,7 +27,6 @@ call vundle#rc()
 "
 Bundle 'gmarik/vundle'
 Bundle 'groenewege/vim-less'
-Bundle 'helino/vim-json'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-distinguished'
@@ -55,6 +54,7 @@ Bundle 'vimgineers/vim-hugefile'
 " Paint css colors with the real color
 Bundle 'lilydjwg/colorizer'
 " JSON support
+Bundle 'elzr/vim-json'
 " html5 support
 Bundle 'othree/html5.vim'
 Bundle 'jelera/vim-javascript-syntax'
@@ -179,7 +179,7 @@ let g:user_zen_expandabbr_key = '<c-e>'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules\|DS_Store\)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|DS_Store)$',
   \ 'file': '\.pyc$\|\.pyo$',
   \ }
 let g:jsx_pragma_required = 1
