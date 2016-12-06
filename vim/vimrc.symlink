@@ -131,24 +131,33 @@ let g:signify_sign_delete_first_line = '⨂'
 let g:signify_sign_change = '⨸'
 let g:signify_sign_changedelete = '⨂'
 let g:pyflakes_use_quickfix = 0
-" This does what it says on the tin. It will check your file on open too, not
-" just on save.
-" You might not want this, so just leave it out if you don't.
-let g:syntastic_javascript_checkers = ['jsxhint']
-let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
-let g:jshint_highlight_color = "Red"
+
+" BEGIN Syntastic plugin configs
+" general settings
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
+let g:jshint_highlight_color = "Red"
 " Better :sign interface symbols
 let g:syntastic_auto_jump=0
-let g:syntastic_python_checkers=['flake8', 'pylint']
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
+let g:syntastic_mode_map = { 'mode': 'active',
+                            \ 'active_filetypes': ['python', 'javascript'],
+                            \ 'passive_filetypes': [] }
+                            
+" Javascript settings
+let g:syntastic_javascript_checkers = ['eslint', 'jshint','jsxhint']
+let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
+
+" Python settings
+let g:syntastic_python_checkers=['flake8', 'pylint']
 let syntastic_python_flake8_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
 let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
+# END Syntastic configs
+
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
 " YCM gives you popups and splits by default that some people might not like,
