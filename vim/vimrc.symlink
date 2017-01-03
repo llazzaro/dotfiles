@@ -156,7 +156,7 @@ let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
 let g:syntastic_python_checkers=['flake8', 'pylint']
 let syntastic_python_flake8_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
 let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
-# END Syntastic configs
+" END Syntastic configs
 
 " These are the tweaks I apply to YCM's config, you don't need them but they
 " might help.
