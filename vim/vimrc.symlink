@@ -42,7 +42,7 @@ Bundle 'kien/tabman.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'fholgado/minibufexpl.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'mxw/vim-jsx.git'
+" Bundle 'mxw/vim-jsx.git'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'scrooloose/syntastic'
 Bundle 'bling/vim-airline'
