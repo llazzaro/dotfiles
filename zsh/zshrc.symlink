@@ -83,7 +83,6 @@ then
     export PYENV_ROOT=/usr/local/var/pyenv
     export LD_LIBRARY_PATH=/usr/local/Cellar/gcc/5.2.0/lib/gcc/5/libgfortran.a
     source /usr/local/bin/virtualenvwrapper.sh
-    export PATH=/Users/leonardolazzaro/anaconda3/bin:$PATH
 fi
 
 export NVM_DIR="$HOME/.nvm"
