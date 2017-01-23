@@ -140,14 +140,12 @@ let g:syntastic_auto_loc_list=1
 let g:jshint_highlight_color = "Red"
 " Better :sign interface symbols
 let g:syntastic_auto_jump=0
-" check also when just opened the file
-let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'active_filetypes': ['python', 'javascript'],
                             \ 'passive_filetypes': [] }
-                            
+
 " Javascript settings
 let g:syntastic_javascript_checkers = ['eslint', 'jshint','jsxhint']
 let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
@@ -156,6 +154,17 @@ let g:syntastic_javascript_jshint_args = '--config ~/.jshintrc'
 let g:syntastic_python_checkers=['flake8', 'pylint']
 let syntastic_python_flake8_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
 let g:syntastic_python_checker_args='--ignore=E501,E225,W293,E126,E127,E128,E221'
+
+" Disable slow scanning of buffer.
+" TODO: look if Syntastic is calling RefreshSigns for every error during a
+" scan.
+let g:syntastic_enable_signs=0
+
+" Disable slow cursor movement.
+" TODO: see if better autocmd than cursormoved or something with a delay
+" because it is slow if there are a lot of errors.
+let g:syntastic_echo_current_error=0
+
 " END Syntastic configs
 
 " These are the tweaks I apply to YCM's config, you don't need them but they
@@ -466,32 +475,3 @@ function UpdateJsHintConf()
 endfunction
 
 au BufEnter * call UpdateJsHintConf()
-
-" Add the virtualenv's site-packages to vim path
-py << EOF
-import re
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-     project_base_dir = os.environ['VIRTUAL_ENV']
-     sys.path.insert(0, project_base_dir)
-     activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
-     execfile(activate_this, dict(__file__=activate_this))
-
-ipdb_breakpoint = 'import ipdb; ipdb.set_trace()'
-
-def set_breakpoint():
-    breakpoint_line = int(vim.eval('line(".")')) - 1
-
-    current_line = vim.current.line
-    white_spaces = re.search('^(\s*)', current_line).group(1)
-
-    vim.current.buffer.append(white_spaces + ipdb_breakpoint, breakpoint_line)
-
-
-def remove_breakpoints():
-    op = 'g/^.*%s.*/d' % ipdb_breakpoint
-    vim.command(op)
-
-EOF
