@@ -22,6 +22,63 @@ set rtp+=~/.vim/bundle/Vundle/
 call vundle#rc()
 
 " -----------------------------------------------------------------------------
+" General settings
+" -----------------------------------------------------------------------------
+"
+
+" Sets how many lines of history VIM has to remember
+set history=500
+syntax on
+filetype plugin on
+filetype indent on
+set encoding=utf-8
+" always show status bar
+set ls=2
+" The completion menu is controlled by completeopt. You can set multiple values to combine behaviours.
+set completeopt=menuone,longest,preview
+set hidden
+set undolevels=1000
+" Indicate matching brackets when cursor is over them.
+set showmatch
+
+" -----------------------------------------------------------------------------
+" Editing
+" -----------------------------------------------------------------------------
+
+" Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
+set backspace=indent,eol,start
+
+" Uncomment below to prevent 'tilde backup files' (eg. myfile.txt~) from being created
+set nobackup
+
+" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being created
+set noswapfile
+
+" -----------------------------------------------------------------------------
+" Indentation
+" -----------------------------------------------------------------------------
+set expandtab " insert space chars whenever a tab key is pressed
+set tabstop=4 " how many columns a tab counts for
+set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab is enabled)
+set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
+" tab length exceptions on some file types
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" For 'make', tabs = tabs.
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+autocmd BufNewFile,BufEnter Makefile set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+autocmd BufNewFile,BufEnter *.mk set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+
+" Erlang
+autocmd FileType erlang set expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd BufNewFile,BufRead rebar.config set filetype=erlang
+autocmd BufNewFile,BufRead *.app.src set filetype=erlang
+
+" Prolog
+autocmd Filetype pl set syntax=prolog
+
+" -----------------------------------------------------------------------------
 " Plugins
 " -----------------------------------------------------------------------------
 "
@@ -70,10 +127,6 @@ if iCanHazVundle == 0
     echo ""
     :BundleInstall
 endif
-
-syntax on
-filetype plugin on
-filetype indent on
 
 " -----------------------------------------------------------------------------
 "  Detect OS to make things nicer
@@ -133,7 +186,7 @@ let g:signify_sign_changedelete = '⨂'
 let g:pyflakes_use_quickfix = 0
 
 " BEGIN Syntastic plugin configs
-" general settings
+" general syntastic settings
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
@@ -173,6 +226,7 @@ let g:syntastic_echo_current_error=0
 " so these should tidy it up a bit for you.
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_confirm_extra_conf=0
+" Disable auto preview window
 set completeopt-=preview
 
 let g:airline#extensions#syntastic#enabled = 1
@@ -196,11 +250,6 @@ let g:jsx_pragma_required = 1
 let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
 let g:ctrlsf_auto_close = 0
 
-set encoding=utf-8
-set completeopt=menuone,longest,preview
-
-" always show status bar
-set ls=2
 let g:syntastic_python_flake8_exe='~/.flake8.sh'
 
 " Nerdtree customizacion section
@@ -239,8 +288,6 @@ call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 " can be put to background without being written; and that marks and undo history are preserved
 
 colorscheme monokai
-set hidden
-set undolevels=1000
 set background=dark
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
 
@@ -257,49 +304,12 @@ set laststatus=2
 " Ignore non-text or back-up files.
 set wildignore=*.o,*.obj,*.a,*.lib,*.so,*.dll,*.exe,*.pyc,*.class,*.swp,*~
 
-" Indicate matching brackets when cursor is over them.
-set showmatch
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
 
 set lazyredraw          " redraw only when we need to.
-" -----------------------------------------------------------------------------
-" Editing
-" -----------------------------------------------------------------------------
 
-" Make "<BS>" and "<Del>" behavior less surprising. (fix backspace problem )
-set backspace=indent,eol,start
-
-" Uncomment below to prevent 'tilde backup files' (eg. myfile.txt~) from being created
-set nobackup
-
-" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being created
-set noswapfile
-
-" -----------------------------------------------------------------------------
-" Indentation
-" -----------------------------------------------------------------------------
-set expandtab " insert space chars whenever a tab key is pressed
-set tabstop=4 " how many columns a tab counts for
-set softtabstop=4 " use 4 space chars for tab with insert mode (since expandtab is enabled)
-set shiftwidth=4 " Number of spaces to use for each step of (auto)indent
-" tab length exceptions on some file types
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" For 'make', tabs = tabs.
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-autocmd BufNewFile,BufEnter Makefile set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-autocmd BufNewFile,BufEnter *.mk set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-
-" Erlang
-autocmd FileType erlang set expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd BufNewFile,BufRead rebar.config set filetype=erlang
-autocmd BufNewFile,BufRead *.app.src set filetype=erlang
-
-" Prolog
-autocmd Filetype pl set syntax=prolog
 " -----------------------------------------------------------------------------
 " Search / Regular Expressions
 " -----------------------------------------------------------------------------
