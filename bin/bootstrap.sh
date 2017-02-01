@@ -82,8 +82,8 @@ install_virtualbox() {
 
 compile_tmux() {
     user ' - Do you want to compile tmux? (yes/no)'
-    read -e compile_vim
-    if [ "$compile_vim" == "yes" ]
+    read -e compile_tmux
+    if [ "$compile_tmux" == "yes" ]
     then
         wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
         tar xf libevent-2.0.21-stable.tar.gz
@@ -232,14 +232,9 @@ compile_vim() {
       git clone https://github.com/vim/vim.git $temp_dir
       cd $temp_dir
       ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
-      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim74 -j4
+      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim80 -j4
       make install
-      mkdir -p $HOME/bin
-      cd $HOME/bin
-      ln -s $HOME/opt/vim/bin/vim
-      vim -S pyclewn-2.1.vmb
    fi
-
 }
 
 

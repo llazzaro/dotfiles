@@ -107,7 +107,7 @@ eval "$(pyenv virtualenv-init -)"
 NVM_SOURCE=$HOME/.nvm/nvm.sh
 lazy_source nvm $NVM_SOURCE
 
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/opt/vim/bin:$PATH"
 eval "$(rbenv init -)"
 
 export GOROOT=/usr/local/go
