@@ -120,6 +120,9 @@ Bundle 'moll/vim-node'
 Bundle 'terryma/vim-expand-region'
 Bundle 'skalnik/vim-vroom'
 Bundle 'gregsexton/MatchTag'
+Bundle 'w0rp/ale'
+Bundle 'google/yapf'
+Bundle 'timothycrosley/isort'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
