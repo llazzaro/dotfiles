@@ -124,10 +124,11 @@ ttyctl -f
 vim()
 {
     # osx users, use stty -g
-    local STTYOPTS="$(stty --save)"
     if [[ "$OSX" == "1" ]]
     then
         local STTYOPTS="$(stty -g)"
+    else
+        local STTYOPTS="$(stty --save)"
     fi
     stty stop '' -ixoff
     command vim "$@"
