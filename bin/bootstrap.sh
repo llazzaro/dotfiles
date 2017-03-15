@@ -140,12 +140,10 @@ install_os_deps() {
 }
 
 install_pyenv() {
-    if [ -d ~/.powerline ]; then
-        cd ~/.pyenv
-        git pull
-        cd
+    if [ -d ~/.pyenv ]; then
+        pyenv update
     else
-        git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+        curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
         git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
     fi
 }
