@@ -107,13 +107,12 @@ install_os_deps() {
 
    if [ "$package_manager" == "yum" ]
    then
-       sudo yum update
-       sudo yum install git mc gcc-c++ ncurses-devel python-devel python-virtualenvwrapper.noarch htop npm
-       sudo yum install make automake gcc gcc-c++ kernel-devel kernel-headers gpg
-       sudo yum install dkms binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel
-       sudo yum install libxslt-devel libxml2-devell nmap libffi-devel
-       sudo yum install wget zsh gitflow subversion ghc ack hg
-       sudo yum-builddep vim
+       sudo dnf update
+       sudo dnf install git mc htop npm
+       sudo dnf install make automake gcc gcc-c++ gpg
+       sudo dnf install dkms binutils make patch libgomp glibc-headers
+       sudo dnf install libxslt-devel libxml2-devell nmap libffi-devel
+       sudo dnf install wget zsh gitflow subversion ghc ack hg
        yum install xclip
    fi
    if [ "$package_manager" == "apt-get" ]
@@ -151,7 +150,7 @@ install_pyenv() {
 install_python_deps() {
    sudo easy_install pip
    sudo pip install -U pip
-   pip install flake8 virtualenv virtualenvwrapper vex --user
+   pip install flake8 virtualenv vex --user
    pip install pyclewn mitmproxy --user
    python -c "import clewn; clewn.get_vimball()"
    if command -v given-command > /dev/null 2>&1; then
@@ -195,27 +194,16 @@ install_deps() {
    install_os_deps
    sudo easy_install pip
    sudo pip install -U pip
-   pip install flake8 virtualenv virtualenvwrapper vex --user
-   pip install pyclewn mitmproxy --user
    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-   python -c "import clewn; clewn.get_vimball()"
-   if command -v given-command > /dev/null 2>&1; then
-     vim -S pyclewn-2.1.vmb
-   fi
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    fi
-   # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | sh
-   # wget http://portswigger.net/burp/burpsuite_free_v1.5.jar
    install_powerlinefonts
    install_pyenv
    install_tmux_plugins
-   # install_npm
-   # sudo npm install -g jshint phantomjs casperjs coffeelint jsxhint
-
 }
 
 compile_vim() {
