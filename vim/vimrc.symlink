@@ -123,6 +123,7 @@ Bundle 'gregsexton/MatchTag'
 Bundle 'w0rp/ale'
 Bundle 'google/yapf'
 Bundle 'timothycrosley/isort'
+Plugin 'tomlion/vim-solidity'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
