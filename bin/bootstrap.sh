@@ -144,6 +144,7 @@ install_pyenv() {
     else
         curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
         git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+        git clone git://github.com/yyuu/pyenv-update.git ~/.pyenv/plugins/pyenv-update
     fi
 }
 
