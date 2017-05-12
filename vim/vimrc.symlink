@@ -101,7 +101,7 @@ Bundle 'fholgado/minibufexpl.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Bundle 'mxw/vim-jsx.git'
 Bundle 'vim-airline/vim-airline-themes'
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 Bundle 'bling/vim-airline'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'tpope/vim-speeddating'

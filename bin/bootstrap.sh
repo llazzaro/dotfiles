@@ -71,7 +71,7 @@ install_npm() {
 }
 
 install_virtualbox() {
-  if [ "$package_manager" == "yum" ]
+  if [ "$package_manager" == "dnf" ]
    then
       cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
       cd -
@@ -102,36 +102,55 @@ compile_tmux() {
     fi
 }
 
+install_os_deps_development() {
+   user ' - Do you want to install development dependencies? (yes/no)'
+   read -e install_dev
+   if [ "install_dev" != "yes" ]
+   then
+       if [ "$package_manager" == "yum" ]
+       then
+           sudo dnf update
+           sudo dnf install npm
+           sudo dnf install make automake gcc gcc-c++ gpg
+           sudo dnf install dkms binutils make patch libgomp glibc-headers
+           sudo dnf install libxslt-devel libxml2-devell nmap libffi-devel
+           sudo dnf install gitflow subversion ghc ack hg
+       fi
+       if [ "$package_manager" == "apt-get" ]
+       then
+           sudo apt-get update
+           sudo apt-get -y install python-flake8 python3-flake8
+           sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev fontconfig vim
+           sudo apt-get -y install make git-core build-essential libffi-dev
+           sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial docker
+           sudo apt-get install -y libjpeg8 libfreetype6 libfreetype6-dev libreadline-dev
+       fi
+
+       if [ "$package_manager" == "brew" ]
+       then
+          # You must install vim after python so that it'll compile with homebrew's python.
+          brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
+       fi
+    fi
+}
+
 install_os_deps() {
    detect_package_manager
 
    if [ "$package_manager" == "yum" ]
    then
        sudo dnf update
-       sudo dnf install git mc htop npm
-       sudo dnf install make automake gcc gcc-c++ gpg
-       sudo dnf install dkms binutils make patch libgomp glibc-headers
-       sudo dnf install libxslt-devel libxml2-devell nmap libffi-devel
-       sudo dnf install wget zsh gitflow subversion ghc ack hg
-       yum install xclip
+       sudo dnf install git mc htop npm wget zsh ach xclip
    fi
    if [ "$package_manager" == "apt-get" ]
    then
        sudo apt-get update
-       sudo apt-get -y install python-flake8 python3-flake8
-       sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev fontconfig vim
-       sudo apt-get -y install zsh git make nmap git-core curl build-essential libffi-dev tmux iotop
-       sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial docker htop
-       sudo apt-get build-dep python-imaging
-       sudo apt-get install libjpeg8 libfreetype6 libfreetype6-dev
-       sudo apt-get install xclip
+       sudo apt-get -y install zsh git nmap curl tmux iotop htop openssl xclip
    fi
 
    if [ "$package_manager" == "brew" ]
    then
       brew install tmux wget python
-      brew install reattach-to-user-namespace
-      brew install tmux wget python pyenv-virtualenv pyenv-virtualenvwrapper
       brew install reattach-to-user-namespace
       # You must install vim after python so that it'll compile with homebrew's python.
       brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
@@ -143,23 +162,15 @@ install_pyenv() {
         pyenv update
     else
         curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-        git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-        git clone git://github.com/yyuu/pyenv-update.git ~/.pyenv/plugins/pyenv-update
     fi
 }
 
 install_python_deps() {
    sudo easy_install pip
    sudo pip install -U pip
-   pip install flake8 virtualenv vex --user
-   pip install pyclewn mitmproxy --user
-   python -c "import clewn; clewn.get_vimball()"
-   if command -v given-command > /dev/null 2>&1; then
-     vim -S pyclewn-2.1.vmb
-   fi
+   pip install flake8 vex --user
+   pip install mitmproxy --user
    pip install --user powerline-status
-   conda install -c conda-forge xonsh
-   sudo chsh -s $(which xonsh)
 }
 
 install_powerlinefonts() {
@@ -193,14 +204,20 @@ install_tmux_plugins() {
 
 install_deps() {
    install_os_deps
+   install_os_deps_development
    sudo easy_install pip
    sudo pip install -U pip
-   git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
-   git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+   if [ ! -d ~/.rbenv ]; then
+       git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+   fi
+
+   if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
+       git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+   fi
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
-      curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+       curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    fi
    install_powerlinefonts
    install_pyenv
