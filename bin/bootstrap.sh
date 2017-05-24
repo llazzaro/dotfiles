@@ -60,7 +60,7 @@ install_oracle_java() {
 
 install_npm() {
     command -v node >/dev/null 2>&1 || {
-        git clone https://github.com/joyent/node.git /tmp/node
+        git clone https://github.com/nodejs/node.git /tmp/node
         cd /tmp/node
         ./configure
         make -j4
