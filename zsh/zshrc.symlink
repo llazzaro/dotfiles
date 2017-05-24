@@ -38,9 +38,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-#virtualenv
-export WORKON_HOME=$HOME/.virtualenvs
-
 #fix vim colors
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
@@ -76,9 +73,7 @@ fi
 if [[ "$LINUX" == "1" ]]
 then
     export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
-    export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/Devel
-    source ~/.local/bin/virtualenvwrapper.sh
     export LC_CTYPE=en_US.UTF-8
     export LC_ALL=C
 fi
@@ -87,7 +82,6 @@ if [[ "$OSX" == "1" ]]
 then
     export PYENV_ROOT=/usr/local/var/pyenv
     export LD_LIBRARY_PATH=/usr/local/Cellar/gcc/5.2.0/lib/gcc/5/libgfortran.a
-    source /usr/local/bin/virtualenvwrapper.sh
 fi
 
 export LC_ALL=en_US.UTF-8
