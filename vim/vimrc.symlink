@@ -90,7 +90,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'majutsushi/tagbar'
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 "Monokai theme
 Bundle 'sickill/vim-monokai'
 " Search inside files
