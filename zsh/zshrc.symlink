@@ -115,7 +115,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # avoids freezing the terminal when using ctrl-s
-alias vim="stty stop '' -ixoff ; vim"
+# alias vim="stty stop '' -ixoff ; vim"
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
 
