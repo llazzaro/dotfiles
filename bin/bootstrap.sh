@@ -32,7 +32,7 @@ function detect_package_manager
 case `uname` in
   Linux )
      LINUX=1
-     type yum >/dev/null 2>&1 && { package_manager='yum'; }
+     type dnf >/dev/null 2>&1 && { package_manager='dnf'; }
      type apt-get >/dev/null 2>&1 && { package_manager='apt-get'; }
      type zypper >/dev/null 2>&1 && { package_manager='zypper'; }
      ;;
@@ -107,7 +107,7 @@ install_os_deps_development() {
    read -e install_dev
    if [ "install_dev" != "yes" ]
    then
-       if [ "$package_manager" == "yum" ]
+       if [ "$package_manager" == "dnf" ]
        then
            sudo dnf update
            sudo dnf install npm
@@ -137,7 +137,7 @@ install_os_deps_development() {
 install_os_deps() {
    detect_package_manager
 
-   if [ "$package_manager" == "yum" ]
+   if [ "$package_manager" == "dnf" ]
    then
        sudo dnf update
        sudo dnf install git mc htop npm wget zsh ach xclip
