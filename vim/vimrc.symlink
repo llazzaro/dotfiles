@@ -80,6 +80,12 @@ autocmd BufNewFile,BufRead *.app.src set filetype=erlang
 " Prolog
 autocmd Filetype pl set syntax=prolog
 
+" Markdown
+set filetype=markdown
+
+:nnoremap <f8> :wa \| !gollum > /dev/null 2>&1 &<CR>
+:nnoremap <f9> :!kill $( pgrep -f gollum )<CR>
+
 " -----------------------------------------------------------------------------
 " Plugins
 " -----------------------------------------------------------------------------
