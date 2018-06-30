@@ -169,7 +169,7 @@ install_python_deps() {
    sudo easy_install pip
    sudo pip install -U pip
    pip install flake8 vex --user
-   pip install mitmproxy --user
+   pip install termtosvg --user
    pip install --user powerline-status
 }
 
