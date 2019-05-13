@@ -9,4 +9,4 @@ else
 fi
 
 cd "$HOME/.dotfiles"
-bin/bootstrap
+$HOME/.dotfiles/bin/bootstrap.sh
