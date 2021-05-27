@@ -47,61 +47,6 @@ esac
 echo "Package manager detected is $package_manager"
 }
 
-install_oracle_java() {
-    wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" "http://download.oracle.com/otn-pub/java/jdk/7/jdk-7-linux-x64.tar.gz"
-    tar zxvf jdk-7-linux-x64.tar.gz
-    sudo mkdir -p /opt/java/oracle_jdk
-    sudo cp -r jdk1.7.0 /opt/java/
-    sudo update-alternatives --install "/usr/bin/java" "java" "/opt/java/jdk1.7.0/bin/java" 1
-    sudo update-alternatives --set java /opt/java/jdk1.7.0/bin/java
-    mkdir -p ~/.mozzila/plugins
-    ln -s /opt/java/jdk1.7.0/jre/lib/amd64/libnpjp2.so ~/.mozzila/plugins/
-}
-
-install_npm() {
-    command -v node >/dev/null 2>&1 || {
-        git clone https://github.com/nodejs/node.git /tmp/node
-        cd /tmp/node
-        ./configure
-        make -j4
-        sudo make install
-    }
-    cd -
-    curl -Lv https://npmjs.org/install.sh | sudo sh
-}
-
-install_virtualbox() {
-  if [ "$package_manager" == "dnf" ]
-   then
-      cd /etc/yum.repos.d/ && sudo wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-      cd -
-      sudo yum update
-      sudo yum install VirtualBox kmod-VirtualBox
-   fi
-}
-
-compile_tmux() {
-    user ' - Do you want to compile tmux? (yes/no)'
-    read -e compile_tmux
-    if [ "$compile_tmux" == "yes" ]
-    then
-        wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
-        tar xf libevent-2.0.21-stable.tar.gz
-        cd libevent-2.0.21-stable
-        ./configure
-        make -j4
-        sudo make install
-        cd -
-        git clone https://github.com/tmux/tmux.git /tmp/tmux-tmux-code
-        cd /tmp/tmux-tmux-code
-        ./autogen.sh
-        ./configure
-        make -j4
-        sudo make install
-        cd -
-    fi
-}
-
 install_os_deps_development() {
    user ' - Do you want to install development dependencies? (yes/no)'
    read -e install_dev
@@ -129,7 +74,8 @@ install_os_deps_development() {
        if [ "$package_manager" == "brew" ]
        then
           # You must install vim after python so that it'll compile with homebrew's python.
-          brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
+          brew update
+          brew install node
        fi
     fi
 }
@@ -153,7 +99,7 @@ install_os_deps() {
       brew install tmux wget python
       brew install reattach-to-user-namespace
       # You must install vim after python so that it'll compile with homebrew's python.
-      brew install vim --env-std --override-system-vim  --with-python --with-ruby --with-perl
+      brew install vim zsh
    fi
 }
 
@@ -162,12 +108,22 @@ install_pyenv() {
         pyenv update
     else
         curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+        echo -e 'if [ -z "$BASH_VERSION" ]; then'\
+          '\n  export PYENV_ROOT="$HOME/.pyenv"'\
+          '\n  export PATH="$PYENV_ROOT/bin:$PATH"'\
+          '\n  eval "$(pyenv init --path)"'\
+          '\nfi' >>~/.profile
+        echo -e 'if [ -z "$BASH_VERSION" ]; then'\
+          '\n  export PYENV_ROOT="$HOME/.pyenv"'\
+          '\n  export PATH="$PYENV_ROOT/bin:$PATH"'\
+          '\n  eval "$(pyenv init --path)"'\
+          '\nfi' >>~/.zprofile
+          zsh
     fi
+
 }
 
 install_python_deps() {
-   sudo easy_install pip
-   sudo pip install -U pip
    pip install flake8 vex --user
    pip install termtosvg --user
    pip install --user powerline-status
@@ -204,9 +160,8 @@ install_tmux_plugins() {
 
 install_deps() {
    install_os_deps
+   install_pyenv
    install_os_deps_development
-   sudo easy_install pip
-   sudo pip install -U pip
    if [ ! -d ~/.rbenv ]; then
        git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
    fi
@@ -214,33 +169,16 @@ install_deps() {
    if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
        git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
    fi
+   pyenv install 3.9.0
+   pyenv local 3.9.0
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
        curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
    fi
    install_powerlinefonts
-   install_pyenv
    install_tmux_plugins
 }
-
-compile_vim() {
-
-   user ' - Do you want to compile vim? (yes/no)'
-   read -e compile_vim
-   if [ "$compile_vim" == "yes" ]
-   then
-      sudo apt-get -y remove vim-common vim-runtime
-      sudo apt-get -y build-dep vim
-      temp_dir=$(mktemp -d)f
-      git clone https://github.com/vim/vim.git $temp_dir
-      cd $temp_dir
-      ./configure --enable-pythoninterp --with-features=huge --with-python-config-dir=/usr/lib64/python2.7/config  --enable-cscope --enable-rubyinterp --enable-luainterp --prefix=$HOME/opt/vim
-      make VIMRUNTIMEDIR=~/opt/vim/share/vim/vim80 -j4
-      make install
-   fi
-}
-
 
 setup_gitconfig () {
   if ! [ -f git/gitconfig.symlink ]
@@ -345,17 +283,9 @@ read -e deps
 if [ "$deps" == "yes" ]
 then
   install_deps
-fi
-
-user ' - Do you want to install python deps? (yes/no)'
-read -e deps
-if [ "$deps" == "yes" ]
-then
   install_python_deps
 fi
-compile_vim
-compile_tmux
-#setup_gitconfig
+
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
