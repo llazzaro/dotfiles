@@ -29,7 +29,7 @@
   tags = tag -n                        # show tags with <n> lines of each tag message
   unstage = reset HEAD # remove files from index (tracking)
   uncommit = reset --soft HEAD^ # go back before last commit, with files in uncommitted state
-  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads 
+  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [push]
@@ -48,6 +48,3 @@
 [user]
   email = llazzaro@dc.uba.ar
   name = Leonardo Lazzaro
-	signingkey = C95B1052
-[commit]
-	gpgsign = true
