@@ -76,6 +76,7 @@ install_os_deps_development() {
           # You must install vim after python so that it'll compile with homebrew's python.
           brew update
           brew install node
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
        fi
     fi
 }
