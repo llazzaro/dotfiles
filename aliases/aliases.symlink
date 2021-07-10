@@ -51,4 +51,4 @@ alias open_ports="sudo netstat -tulpn"
 alias vlc='open -a vlc'
 alias gitx='gittower "$(git rev-parse --show-toplevel)"'
 #alias docker_ips = "docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)"
-alias docket = docker # new keyboard
+#alias docket = docker # new keyboard
