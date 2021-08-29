@@ -89,7 +89,7 @@ export LANG=en_US.UTF-8
 
 export ANSIBLE_CONFIG=~/.ansible/ansible.cfg
 export ANSIBLE_HOSTS=~/.ansible/hosts
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin:/opt/homebrew/bin
 export EDITOR=vim
 
 # pyenv related env vars and initialization

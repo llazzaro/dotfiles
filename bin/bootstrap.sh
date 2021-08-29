@@ -76,7 +76,9 @@ install_os_deps_development() {
           # You must install vim after python so that it'll compile with homebrew's python.
           brew update
           brew install node doctl kubectx fluxctl helm postgres openssl automake libtool kube-ps1 stern
-          brew install derailed/popeye/popeye
+          brew install openssl readline sqlite3 xz zlib doctl
+          brew install derailed/popeye/popeye rbenv
+          echo "Downloading kubectl"
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
           chmod +x ./kubectl
           sudo mv ./kubectl /usr/local/bin/kubectl
@@ -175,8 +177,8 @@ install_deps() {
    if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
        git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
    fi
-   pyenv install 3.9.0
-   pyenv local 3.9.0
+   pyenv install 3.9.4
+   pyenv local 3.9.4
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
