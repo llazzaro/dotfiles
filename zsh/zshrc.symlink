@@ -130,6 +130,5 @@ vim()
 }
 
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-source /usr/local/opt/kube-ps1/share/kube-ps1.sh
-
-PROMPT='$(kube_ps1)'$PROMPT
+source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
+PS1='$(kube_ps1)'$PS1
