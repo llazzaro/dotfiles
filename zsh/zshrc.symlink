@@ -132,3 +132,14 @@ vim()
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
 PS1='$(kube_ps1)'$PS1
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+export PATH="$HOME/.poetry/bin:$HOME/.gloo/bin:$PATH:$HOME/.cargo/bin"
+
+source $HOME/.poetry/env
+
+if which ruby >/dev/null && which gem >/dev/null; then
+  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
