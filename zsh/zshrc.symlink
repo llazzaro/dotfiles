@@ -130,7 +130,13 @@ vim()
 }
 
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
+if [[ "$OSX" == "1" ]]
+then
+    source ~/.kubectl-ps1/kube-ps1.sh
+else
+    source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
+fi
+
 PS1='$(kube_ps1)'$PS1
 
 export NVM_DIR=~/.nvm
