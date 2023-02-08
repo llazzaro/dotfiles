@@ -76,7 +76,7 @@ install_os_deps_development() {
           # You must install vim after python so that it'll compile with homebrew's python.
           brew update
           brew install node doctl kubectx fluxctl helm postgres openssl automake libtool kube-ps1 stern
-          brew install openssl readline sqlite3 xz zlib doctl
+          brew install openssl readline sqlite3 xz zlib doctl nvim
           brew install derailed/popeye/popeye rbenv
           echo "Downloading kubectl"
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
@@ -280,6 +280,7 @@ install_dotfiles () {
     fi
     `cp -r vim/compiler ~/.vim/ `
     `cp -r vim/colors ~/.vim/ `
+    `cp -r nvim ~/.config/nvim `
     `mkdir -p ~/.xmonad `
     `cp -r xmonad/xmonad.hs ~/.xmonad/xmonad.hs `
   done
