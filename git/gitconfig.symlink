@@ -48,3 +48,5 @@
 [user]
   email = llazzaro@dc.uba.ar
   name = Leonardo Lazzaro
+[credential]
+	helper = store
