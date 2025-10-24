@@ -4,8 +4,9 @@
 ##---------------------------------------------------------------
 
 # use UTF8
-set -g utf8
-set-window-option -g utf8 on
+# UTF8 is now the default in tmux 2.2+
+# set -g utf8
+# set-window-option -g utf8 on
 
 # make tmux display things in 256 colors
 set -g default-terminal screen-256color
@@ -21,14 +22,13 @@ set -sg escape-time 1
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
-set-option -g pane-border-fg colour235
+set-option -g pane-border-style fg=colour235
 # set-option -g pane-active-border-fg colour2s40
-set-option -g message-bg black
-set-option -g message-fg brightred
+set-option -g message-style bg=black,fg=brightred
 
 # Status bar customization
 set-option -g status on
-set -g status-utf8 on
+# set -g status-utf8 on  # UTF8 is now the default
 set -g status-interval 5
 set -g status-justify centre
 setw -g monitor-activity on
@@ -47,11 +47,9 @@ set -g status-right-length 150
 set -g window-status-format "#[fg=colour244,bg=colour234]#I #[fg=colour240] #[default]#W "
 set -g window-status-current-format "#[fg=colour234,bg=colour31]#[fg=colour117,bg=colour31] #I  #[fg=colour231,bold]#W #[fg=colour31,bg=colour234,nobold]"
 
-set-window-option -g window-status-fg colour249
-set-window-option -g window-status-activity-attr none
-set-window-option -g window-status-bell-attr none
-set-window-option -g window-status-activity-fg yellow
-set-window-option -g window-status-bell-fg red
+set-window-option -g window-status-style fg=colour249
+set-window-option -g window-status-activity-style none,fg=yellow
+set-window-option -g window-status-bell-style none,fg=red
 
 
 # use zsh as default shell
@@ -119,7 +117,7 @@ set -g visual-activity on
 set -g @shell_mode 'vi'
 
 # Highlighting the active window in status bar
-setw -g window-status-current-bg red
+setw -g window-status-current-style bg=red
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
