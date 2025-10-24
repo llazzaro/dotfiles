@@ -55,8 +55,11 @@ zstyle ':completion:*' special-dirs true
 REPORTTIME=2
 
 # Load modular configuration
-source "$HOME/.dotfiles/zsh/config.zsh"
-init_dotfiles_config
+DOTFILES_ROOT="$HOME/dotfiles"
+if [[ -f "$DOTFILES_ROOT/zsh/config.zsh" ]]; then
+    source "$DOTFILES_ROOT/zsh/config.zsh"
+    init_dotfiles_config
+fi
 
 # avoids freezing the terminal when using ctrl-s
 # alias vim="stty stop '' -ixoff ; vim"
@@ -80,21 +83,30 @@ vim()
 }
 
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-if [[ "$OSX" == "1" ]]
-then
+# Load kube-ps1 if available
+if [[ -f ~/.kubectl-ps1/kube-ps1.sh ]]; then
     source ~/.kubectl-ps1/kube-ps1.sh
-else
+    PS1='$(kube_ps1)'$PS1
+elif [[ -f /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ]]; then
     source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
+    PS1='$(kube_ps1)'$PS1
 fi
 
-PS1='$(kube_ps1)'$PS1
-
+# Load NVM if available
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+if command -v brew >/dev/null 2>&1 && [[ -f "$(brew --prefix nvm)/nvm.sh" ]]; then
+    source "$(brew --prefix nvm)/nvm.sh"
+elif [[ -f "$NVM_DIR/nvm.sh" ]]; then
+    source "$NVM_DIR/nvm.sh"
+fi
 
-export PATH="$HOME/.poetry/bin:$HOME/.gloo/bin:$PATH:$HOME/.cargo/bin"
+# Add optional tools to PATH if they exist
+[[ -d "$HOME/.poetry/bin" ]] && export PATH="$HOME/.poetry/bin:$PATH"
+[[ -d "$HOME/.gloo/bin" ]] && export PATH="$HOME/.gloo/bin:$PATH"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
-source $HOME/.poetry/env
+# Load poetry environment if available
+[[ -f "$HOME/.poetry/env" ]] && source "$HOME/.poetry/env"
 
 if which ruby >/dev/null && which gem >/dev/null; then
   PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
