@@ -111,24 +111,13 @@ install_os_deps() {
    fi
 }
 
-install_pyenv() {
-    if [ -d ~/.pyenv ]; then
-        pyenv update
+install_uv() {
+    if ! command -v uv >/dev/null 2>&1; then
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "uv installed successfully"
     else
-        curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-        echo -e 'if [ -z "$BASH_VERSION" ]; then'\
-          '\n  export PYENV_ROOT="$HOME/.pyenv"'\
-          '\n  export PATH="$PYENV_ROOT/bin:$PATH"'\
-          '\n  eval "$(pyenv init --path)"'\
-          '\nfi' >>~/.profile
-        echo -e 'if [ -z "$BASH_VERSION" ]; then'\
-          '\n  export PYENV_ROOT="$HOME/.pyenv"'\
-          '\n  export PATH="$PYENV_ROOT/bin:$PATH"'\
-          '\n  eval "$(pyenv init --path)"'\
-          '\nfi' >>~/.zprofile
-          zsh
+        echo "uv is already installed"
     fi
-
 }
 
 install_python_deps() {
@@ -168,7 +157,7 @@ install_tmux_plugins() {
 
 install_deps() {
    install_os_deps
-   install_pyenv
+   install_uv
    install_os_deps_development
    if [ ! -d ~/.rbenv ]; then
        git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -177,8 +166,7 @@ install_deps() {
    if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
        git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
    fi
-   pyenv install 3.9.4
-   pyenv local 3.9.4
+   # Python setup now handled by uv
    pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
