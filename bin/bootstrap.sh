@@ -27,88 +27,20 @@ fail () {
   exit
 }
 
-function detect_package_manager
-{
-case `uname` in
-  Linux )
-     LINUX=1
-     type dnf >/dev/null 2>&1 && { package_manager='dnf'; }
-     type apt-get >/dev/null 2>&1 && { package_manager='apt-get'; }
-     type zypper >/dev/null 2>&1 && { package_manager='zypper'; }
-     ;;
-  Darwin )
-     DARWIN=1
-     type brew >/dev/null 2>&1 && { package_manager='brew'; }
-     ;;
-  * )
-     # Handle AmigaOS, CPM, and modified cable modems here.
-     ;;
-esac
-echo "Package manager detected is $package_manager"
-}
+# Load package manager abstraction
+source "$DOTFILES_ROOT/bin/package-managers.sh"
 
 install_os_deps_development() {
    user ' - Do you want to install development dependencies? (yes/no)'
    read -e install_dev
-   if [ "install_dev" != "yes" ]
-   then
-       if [ "$package_manager" == "dnf" ]
-       then
-           sudo dnf update
-           sudo dnf install npm
-           sudo dnf install make automake gcc gcc-c++ gpg
-           sudo dnf install dkms binutils make patch libgomp glibc-headers
-           sudo dnf install libxslt-devel libxml2-devell nmap libffi-devel
-           sudo dnf install gitflow subversion ghc ack hg
-       fi
-       if [ "$package_manager" == "apt-get" ]
-       then
-           sudo apt-get update
-           sudo apt-get -y install python-flake8 python3-flake8
-           sudo apt-get -y install python-setuptools python-dev libxml2-dev libxslt1-dev fontconfig vim
-           sudo apt-get -y install make git-core build-essential libffi-dev
-           sudo apt-get -y install openssl libssl-dev autoconf automake libtool ack-grep mercurial docker
-           sudo apt-get install -y libjpeg8 libfreetype6 libfreetype6-dev libreadline-dev
-       fi
-
-       if [ "$package_manager" == "brew" ]
-       then
-          # You must install vim after python so that it'll compile with homebrew's python.
-          brew update
-          brew install node doctl kubectx fluxctl helm postgres openssl automake libtool kube-ps1 stern
-          brew install openssl readline sqlite3 xz zlib doctl nvim
-          brew install derailed/popeye/popeye rbenv
-          echo "Downloading kubectl"
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
-          chmod +x ./kubectl
-          sudo mv ./kubectl /usr/local/bin/kubectl
-          sudo chown root: /usr/local/bin/kubectl
-
-       fi
-    fi
+   if [ "$install_dev" == "yes" ]; then
+       install_dev_deps
+   fi
 }
 
 install_os_deps() {
    detect_package_manager
-
-   if [ "$package_manager" == "dnf" ]
-   then
-       sudo dnf update
-       sudo dnf install git mc htop npm wget zsh ach xclip
-   fi
-   if [ "$package_manager" == "apt-get" ]
-   then
-       sudo apt-get update
-       sudo apt-get -y install zsh git nmap curl tmux iotop htop openssl xclip
-   fi
-
-   if [ "$package_manager" == "brew" ]
-   then
-      brew install tmux wget python
-      brew install reattach-to-user-namespace
-      # You must install vim after python so that it'll compile with homebrew's python.
-      brew install vim zsh
-   fi
+   install_basic_deps
 }
 
 install_uv() {
