@@ -35,7 +35,7 @@
 [push]
   # 'git push' will push the current branch to its tracking branch
   # the usual default is to push all branches
-  default = tracking
+  default = simple
 [core]
   editor = vim -f
 [diff]
@@ -48,5 +48,16 @@
 [user]
   email = llazzaro@dc.uba.ar
   name = Leonardo Lazzaro
-[credential]
-	helper = store
+[commit]
+  # Consider enabling with gpgsign = true
+  gpgsign = false
+[pull]
+  rebase = true
+[init]
+  defaultBranch = main
+[fetch]
+  prune = true
+# Credential helper should be set per-machine in .gitconfig.local
+# macOS: helper = osxkeychain
+# Linux: helper = cache --timeout=3600  (or libsecret)
+# Avoid helper = store (plaintext passwords)

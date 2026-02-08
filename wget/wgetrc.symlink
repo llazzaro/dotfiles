@@ -14,7 +14,7 @@ tries = 3
 retry_connrefused = on
 
 # Use the last component of a redirection URL for the local file name
-trust_server_names = on
+trust_server_names = off
 
 # Follow FTP links from HTML documents by default
 follow_ftp = on
@@ -28,11 +28,11 @@ adjust_extension = on
 # http://unix.stackexchange.com/q/34730/6040
 #local_encoding = UTF-8
 
-# Ignore `robots.txt` and `<meta name=robots content=nofollow>`
-robots = off
+# Respect `robots.txt` and `<meta name=robots content=nofollow>`
+robots = on
 
 # Print the HTTP and FTP server responses
 server_response = on
 
 # Disguise as IE 9 on Windows 7
-user_agent = Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+# user_agent = Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)

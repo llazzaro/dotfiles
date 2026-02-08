@@ -1,10 +1,12 @@
 # Platform detection
 detect_platform() {
-    if [[ $(uname) == 'Linux' ]]; then
+    local _uname
+    _uname="$(uname)"
+    if [[ "$_uname" == 'Linux' ]]; then
         export LINUX=1
         export GNU_USERLAND=1
         export OSX=0
-    elif [[ $(uname) == 'Darwin' ]]; then
+    elif [[ "$_uname" == 'Darwin' ]]; then
         export OSX=1
         export LINUX=0
         export GNU_USERLAND=0
@@ -22,10 +24,6 @@ setup_platform_config() {
         export PROJECT_HOME=$HOME/Devel
         export LC_CTYPE=en_US.UTF-8
         export LC_ALL=C
-    fi
-
-    if [[ "$OSX" == "1" ]]; then
-        export LD_LIBRARY_PATH=/usr/local/Cellar/gcc/5.2.0/lib/gcc/5/libgfortran.a
     fi
 }
 
@@ -56,14 +54,23 @@ setup_dev_tools() {
     export PATH=$PATH:$HOME/.rvm/bin
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-    # rbenv
+    # rbenv (lazy loaded)
     if command -v rbenv >/dev/null 2>&1; then
-        eval "$(rbenv init -)"
+        rbenv() {
+            unfunction rbenv
+            eval "$(command rbenv init -)"
+            rbenv "$@"
+        }
     fi
 
-    # uv Python package manager
+    # uv Python package manager (cached completion)
     if command -v uv >/dev/null 2>&1; then
-        eval "$(uv generate-shell-completion zsh)"
+        _uv_comp_cache="${HOME}/.zsh_cache/_uv"
+        if [[ ! -f "$_uv_comp_cache" ]] || [[ "$(command -v uv)" -nt "$_uv_comp_cache" ]]; then
+            mkdir -p "${HOME}/.zsh_cache"
+            uv generate-shell-completion zsh > "$_uv_comp_cache"
+        fi
+        source "$_uv_comp_cache"
     fi
 
     # NVM (lazy loaded)

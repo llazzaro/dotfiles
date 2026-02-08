@@ -1,7 +1,10 @@
 # lazy_source function to avoid slowdown on new terminal or tmux windows.
 lazy_source () {
-    eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+    eval "$1 () { [ -f \"$2\" ] && unfunction $1 && source \"$2\" && $1 \$@ }"
 }
+
+# Auto-deduplicate PATH entries
+typeset -U path
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -38,16 +41,8 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-#fix vim colors
-export TERM=xterm-256color
-[ -n "$TMUX" ] && export TERM=screen-256color
-
 # add aliases
 source $HOME/.aliases
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session
 
 zstyle ':completion:*' special-dirs true
 
@@ -92,22 +87,10 @@ elif [[ -f /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ]]; then
     PS1='$(kube_ps1)'$PS1
 fi
 
-# Load NVM if available
-export NVM_DIR=~/.nvm
-if command -v brew >/dev/null 2>&1 && [[ -f "$(brew --prefix nvm)/nvm.sh" ]]; then
-    source "$(brew --prefix nvm)/nvm.sh"
-elif [[ -f "$NVM_DIR/nvm.sh" ]]; then
-    source "$NVM_DIR/nvm.sh"
-fi
-
 # Add optional tools to PATH if they exist
-[[ -d "$HOME/.poetry/bin" ]] && export PATH="$HOME/.poetry/bin:$PATH"
 [[ -d "$HOME/.gloo/bin" ]] && export PATH="$HOME/.gloo/bin:$PATH"
-[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
-# Load poetry environment if available
-[[ -f "$HOME/.poetry/env" ]] && source "$HOME/.poetry/env"
-
-if which ruby >/dev/null && which gem >/dev/null; then
-  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# Ruby gem path (cached, avoids subprocess)
+if [[ -d "$HOME/.gem/ruby" ]]; then
+  PATH="$(ls -d $HOME/.gem/ruby/*/bin 2>/dev/null | head -1):$PATH"
 fi

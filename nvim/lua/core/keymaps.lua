@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleadr = ' '
+vim.g.maplocalleader = ' '
 
 vim.opt.backspace = '2'
 vim.opt.showcmd = true

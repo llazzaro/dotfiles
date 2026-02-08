@@ -55,7 +55,6 @@ install_uv() {
 install_python_deps() {
    pip install flake8 vex --user
    pip install termtosvg --user
-   pip install --user powerline-status
 }
 
 install_powerlinefonts() {
@@ -92,14 +91,13 @@ install_deps() {
    install_uv
    install_os_deps_development
    if [ ! -d ~/.rbenv ]; then
-       git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+       git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
    fi
 
    if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
-       git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+       git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
    fi
    # Python setup now handled by uv
-   pip install --user powerline-status
    # pip install git+https://github.com/Lokaltog/powerline.git --user
    if [ ! -d ~/.oh-my-zsh ]; then
        curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
@@ -131,7 +129,7 @@ setup_gitconfig () {
 }
 
 link_files () {
-  ln -s $1 $2
+  ln -s "$1" "$2"
   success "linked $1 to $2"
 }
 
@@ -142,11 +140,11 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
+  for source in `find "$DOTFILES_ROOT" -maxdepth 2 -name \*.symlink`
   do
     dest="$HOME/.`basename \"${source%.*}\"`"
 
-    if [ -f $dest ] || [ -d $dest ]
+    if [ -f "$dest" ] || [ -d "$dest" ]
     then
 
       overwrite=false
@@ -155,7 +153,7 @@ install_dotfiles () {
 
       if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
       then
-        user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        user "File already exists: $(basename "$source"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -n 1 action
 
         case "$action" in
@@ -178,32 +176,31 @@ install_dotfiles () {
 
       if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
       then
-        rm -rf $dest
+        rm -rf "$dest"
         success "removed $dest"
       fi
 
       if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
       then
-        mv $dest $dest\.backup
+        mv "$dest" "$dest.backup"
         success "moved $dest to $dest.backup"
       fi
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
       then
-        link_files $source $dest
+        link_files "$source" "$dest"
       else
         success "skipped $source"
       fi
 
     else
-      link_files $source $dest
+      link_files "$source" "$dest"
     fi
-    `cp -r vim/compiler ~/.vim/ `
-    `cp -r vim/colors ~/.vim/ `
-    `cp -r nvim ~/.config/nvim `
-    `mkdir -p ~/.xmonad `
-    `cp -r xmonad/xmonad.hs ~/.xmonad/xmonad.hs `
   done
+
+  cp -r vim/compiler ~/.vim/
+  cp -r vim/colors ~/.vim/
+  cp -r nvim ~/.config/nvim
 }
 
 

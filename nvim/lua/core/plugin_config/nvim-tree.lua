@@ -1,5 +1,5 @@
-vim.g.loaded_newtrw = 1
-vim.g.loaded_newtrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 require("nvim-tree").setup()
 

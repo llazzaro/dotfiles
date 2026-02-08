@@ -8,23 +8,28 @@ alias tmux="tmux -2"
 alias find_big_files="du -a / | sort -n -r | head -n 10"
 alias find_images="find . -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image'"
 alias delete_pycs="find . -name \"*.pyc\" -exec rm -rf {} \;"
-alias l='ls -lAh --color'
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias l='ls -lAh -G'
+else
+    alias l='ls -lAh --color'
+fi
 alias 'weather'='curl -k4 http://wttr.in/Milan'
 alias 'mkdir'='mkdir -p'
-alias 'download-music'='youtube-dl -x --audio-quality 0 --audio-format mp3'
+alias 'download-music'='yt-dlp -x --audio-quality 0 --audio-format mp3'
 # find a string in the git history
 alias gitsearch='git rev-list --all | xargs git grep -F'
 alias rm="rm -i"
 #ban ip
 function ban() {
     if [ "`id -u`" == "0" ] ; then
-        iptables -A INPUT -s $1 -j DROP
+        iptables -A INPUT -s "$1" -j DROP
     else
-        sudo iptables -A INPUT -s $1 -j DROP
+        sudo iptables -A INPUT -s "$1" -j DROP
     fi
 }
 
-#do a sudo command on the last command typed
+# Re-run the last command with sudo, or run a command with sudo.
+# WARNING: history-based re-execution can be surprising; review before use.
 s(){
     if [[ $# == 0 ]]; then
         sudo $(history -p '!!')
@@ -33,14 +38,14 @@ s(){
     fi
 }
 
-# python simplehhtp
-alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
+# python simple http server
+alias servethis="python3 -m http.server"
 
 # Get week number
 alias week='date +%V'
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]))"'
 
 #  HTTP headers without fetching the actual content of the page
 alias icurl="curl -I"
