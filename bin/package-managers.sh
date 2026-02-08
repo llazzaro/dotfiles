@@ -81,8 +81,8 @@ install_dev_deps() {
             ;;
         brew)
             brew update
-            brew install node doctl kubectx fluxctl helm postgres openssl automake libtool
-            brew install kube-ps1 stern openssl readline sqlite3 xz zlib doctl nvim
+            brew install node doctl kubectx helm openssl automake libtool
+            brew install kube-ps1 stern readline sqlite3 xz zlib nvim
             brew install derailed/popeye/popeye rbenv
             install_kubectl_macos
             ;;

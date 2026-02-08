@@ -53,8 +53,7 @@ install_uv() {
 }
 
 install_python_deps() {
-   pip install flake8 vex --user
-   pip install termtosvg --user
+   uv tool install ruff
 }
 
 install_powerlinefonts() {
@@ -71,7 +70,7 @@ install_powerlinefonts() {
        mkdir -p ~/.config/fontconfig
        mkdir -p ~/.config/fontconfig/conf.d
        git clone https://github.com/Lokaltog/powerline.git ~/.powerline
-       if [ ! "$package_manager" == "brew" ]; then
+       if [ ! "$PACKAGE_MANAGER" == "brew" ]; then
             git clone https://github.com/Lokaltog/powerline-fonts.git ~/.fonts
             sudo cp ~/.powerline/font/10-powerline-symbols.conf /etc/fonts/conf.d
             fc-cache -vf ~/.fonts
