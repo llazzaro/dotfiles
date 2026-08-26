@@ -101,7 +101,24 @@ install_dev_deps() {
 install_kubectl_macos() {
     if ! command -v kubectl >/dev/null 2>&1; then
         echo "Installing kubectl..."
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
+        local version stable_url kubectl_binary checksum_url expected actual
+        version="$(curl -L -s https://dl.k8s.io/release/stable.txt)"
+        stable_url="https://dl.k8s.io/release/${version}/bin/darwin/amd64/kubectl"
+        checksum_url="${stable_url}.sha256"
+        curl -LO "$stable_url"
+        curl -Lo ./kubectl.sha256 "$checksum_url"
+        expected="$(tr -d '[:space:]' < ./kubectl.sha256)"
+        if command -v sha256sum >/dev/null 2>&1; then
+            actual="$(sha256sum ./kubectl | tr -d '[:space:]' | cut -d' ' -f1)"
+        else
+            actual="$(shasum -a 256 ./kubectl | tr -d '[:space:]' | cut -d' ' -f1)"
+        fi
+        rm -f ./kubectl.sha256
+        if [ "$actual" != "$expected" ]; then
+            echo "kubectl checksum verification failed (expected $expected, got $actual)" >&2
+            rm -f ./kubectl
+            return 1
+        fi
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
         sudo chown root: /usr/local/bin/kubectl

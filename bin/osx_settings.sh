@@ -25,7 +25,7 @@ defaults write com.apple.Safari WebKitDeveloperExtras -bool true
 defaults write com.apple.CrashReporter DialogType -string developer
 
 ## Screenshots
-mkdir $HOME/screenshots
+mkdir -p "$HOME/screenshots"
 defaults write com.apple.screencapture location -string "$HOME/screenshots"
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -37,9 +37,8 @@ sudo defaults -currentHost write com.apple.screensaver askForPassword -int 1
 sudo defaults write /Library/Preferences/com.apple.virtualMemory UseEncryptedSwap -bool yes
 # Enable Firewall options: # 1 essential, 2 specific services
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
-# Fuck em'all (http://krypted.com/mac-os-x/the-os-x-application-layer-firewall-part-3-lion/)
-/usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on --setblockall on
-# Enable Stealth mode.
-sudo defaults write /Library/Preferences/com.apple.alf stealthenabled 1
-# Enable ipfw logs
-sudo defaults write /Library/Preferences/com.apple.alf loggingenabled 1
+# Enable the application firewall and stealth mode (modern macOS).
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+# Enable firewall logging.
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on

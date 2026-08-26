@@ -45,9 +45,10 @@
   tool = vimdiff
 [merge]
   tool = vimdiff
-[user]
-  email = llazzaro@dc.uba.ar
-  name = Leonardo Lazzaro
+# Personal identity goes in ~/.gitconfig.local, e.g.:
+#   [user]
+#     name  = Your Name
+#     email = you@example.com
 [commit]
   # Consider enabling with gpgsign = true
   gpgsign = false

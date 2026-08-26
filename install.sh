@@ -1,12 +1,14 @@
 #!/bin/sh
 
-if [ ! -d "$HOME/.dotfiles" ]; then
+DOTFILES_DIR="$HOME/.dotfiles"
+
+if [ ! -d "$DOTFILES_DIR" ]; then
   echo "Installing dotfiles for the first time"
-  git clone https://github.com/llazzaro/dotfiles.git "$HOME/.dotfiles"
+  git clone https://github.com/llazzaro/dotfiles.git "$DOTFILES_DIR"
 else
-  echo "Updating dotfiles\n"
-  cd "$HOME/.dotfiles" && git pull
+  echo "Updating dotfiles..."
+  git -C "$DOTFILES_DIR" pull
 fi
 
-cd "$HOME/.dotfiles"
-$HOME/.dotfiles/bin/bootstrap.sh
+cd "$DOTFILES_DIR" || exit 1
+bash bin/bootstrap.sh

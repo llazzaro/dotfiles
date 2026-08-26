@@ -50,7 +50,7 @@ zstyle ':completion:*' special-dirs true
 REPORTTIME=2
 
 # Load modular configuration
-DOTFILES_ROOT="$HOME/dotfiles"
+DOTFILES_ROOT="$HOME/.dotfiles"
 if [[ -f "$DOTFILES_ROOT/zsh/config.zsh" ]]; then
     source "$DOTFILES_ROOT/zsh/config.zsh"
     init_dotfiles_config

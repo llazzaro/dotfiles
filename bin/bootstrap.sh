@@ -90,11 +90,11 @@ install_deps() {
    install_uv
    install_os_deps_development
    if [ ! -d ~/.rbenv ]; then
-       git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
    fi
 
    if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
-       git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+       git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
    fi
    # Python setup now handled by uv
    # pip install git+https://github.com/Lokaltog/powerline.git --user
@@ -106,7 +106,7 @@ install_deps() {
 }
 
 setup_gitconfig () {
-  if ! [ -f git/gitconfig.symlink ]
+  if ! [ -f "$HOME/.gitconfig" ]
   then
     info 'setup gitconfig'
 
@@ -128,8 +128,13 @@ setup_gitconfig () {
 }
 
 link_files () {
-  ln -s "$1" "$2"
-  success "linked $1 to $2"
+  if [ -L "$2" ] && [ "$(readlink "$2")" = "$1" ]
+  then
+    success "already linked $1 to $2"
+  else
+    ln -s "$1" "$2"
+    success "linked $1 to $2"
+  fi
 }
 
 install_dotfiles () {
@@ -181,8 +186,9 @@ install_dotfiles () {
 
       if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
       then
-        mv "$dest" "$dest.backup"
-        success "moved $dest to $dest.backup"
+        backup_dest="$dest.backup.$(date +%Y%m%d%H%M%S)"
+        mv "$dest" "$backup_dest"
+        success "moved $dest to $backup_dest"
       fi
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
@@ -197,9 +203,10 @@ install_dotfiles () {
     fi
   done
 
-  cp -r vim/compiler ~/.vim/
-  cp -r vim/colors ~/.vim/
-  cp -r nvim ~/.config/nvim
+  mkdir -p ~/.vim/compiler ~/.vim/colors ~/.config/nvim
+  cp -r vim/compiler/. ~/.vim/compiler/
+  cp -r vim/colors/. ~/.vim/colors/
+  cp -r nvim/. ~/.config/nvim/
 }
 
 
@@ -212,17 +219,5 @@ then
 fi
 
 install_dotfiles
-
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
 
 echo '  All installed!'

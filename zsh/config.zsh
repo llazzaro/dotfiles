@@ -20,18 +20,18 @@ detect_platform() {
 # Platform-specific configuration
 setup_platform_config() {
     if [[ "$LINUX" == "1" ]]; then
-        export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
+        local _cpus
+        _cpus="$(command -v nproc >/dev/null 2>&1 && nproc || grep -c processor /proc/cpuinfo)"
+        export MAKEFLAGS="-j${_cpus}"
         export PROJECT_HOME=$HOME/Devel
-        export LC_CTYPE=en_US.UTF-8
-        export LC_ALL=C
     fi
 }
 
 # Development tools setup
 setup_dev_tools() {
     # Common exports
-    export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
+    export LC_CTYPE=en_US.UTF-8
     export EDITOR=vim
     export TERM=xterm-256color
     [ -n "$TMUX" ] && export TERM=screen-256color

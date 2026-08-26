@@ -6,14 +6,14 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias tmux="tmux -2"
 alias find_big_files="du -a / | sort -n -r | head -n 10"
-alias find_images="find . -name '*' -exec file {} \; | grep -o -P '^.+: \w+ image'"
+alias find_images="find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' \)"
 alias delete_pycs="find . -name \"*.pyc\" -exec rm -rf {} \;"
 if [[ "$(uname)" == "Darwin" ]]; then
     alias l='ls -lAh -G'
 else
     alias l='ls -lAh --color'
 fi
-alias 'weather'='curl -k4 http://wttr.in/Milan'
+alias 'weather'='curl -4 https://wttr.in/Milan'
 alias 'mkdir'='mkdir -p'
 alias 'download-music'='yt-dlp -x --audio-quality 0 --audio-format mp3'
 # find a string in the git history
@@ -38,8 +38,8 @@ s(){
     fi
 }
 
-# python simple http server
-alias servethis="python3 -m http.server"
+# python simple http server (loopback only; add --bind 0.0.0.0 to expose)
+alias servethis="python3 -m http.server --bind 127.0.0.1"
 
 # Get week number
 alias week='date +%V'

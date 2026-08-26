@@ -19,9 +19,6 @@ trust_server_names = off
 # Follow FTP links from HTML documents by default
 follow_ftp = on
 
-# Add a `.html` extension to `text/html` or `application/xhtml+xml` files that lack one, or a `.css` extension to `text/css` files that lack one
-adjust_extension = on
-
 # Use UTF-8 as the default system encoding
 # Disabled as it makes `wget` builds that don’t support this feature unusable.
 # Does anyone know how to conditionally configure a wget setting?
